@@ -1,4 +1,4 @@
-const allFirma = 'alle';
+allFirma = 'alle';
 
 function fetchAllUser() {
   we.api.getUsers('limit=1')
@@ -22,6 +22,7 @@ function createAndDownloadVcards() {
 
   const vcsString = allUsers.filter(user => user.enabled)
     .filter(user => user.status == 'activated')
+    .filter(user => user.phoneNumber)
     .filter(firmafilter)
     //.slice(8, 10)
     .map(user => {
