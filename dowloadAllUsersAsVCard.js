@@ -72,6 +72,7 @@ function insertButtonAndSelect() {
 
   firmen = allUsers.filter(x => x.profile !== undefined)
     .filter(x => x.profile.firma !== undefined)
+    .filter(x => x.profile.firma !== 'Extern')
     .map(y => y.profile.firma)
   options = new Set([allFirma].concat(firmen));
   options.forEach(opt => {
