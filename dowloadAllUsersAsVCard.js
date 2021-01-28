@@ -22,7 +22,7 @@ function createAndDownloadVcards() {
 
   const vcsString = allUsers.filter(user => user.enabled)
     .filter(user => user.status == 'activated')
-    .filter(user => user.phoneNumber)
+    .filter(user => user.phoneNumber || user.profile.mobilnummer)
     .filter(firmafilter)
     //.slice(8, 10)
     .map(user => {
