@@ -27,9 +27,11 @@ if (date === "1.1.") {
     var emoji = "🎉";
 }
 
+var user = we.authMgr.getUser()
+
 var greetingSelector = document.querySelector('.external-script-widget[data-widget-id="greeting"]');
-var firstName = we.authMgr.getUser().firstName;
-var profileLink = "/profile/" + we.authMgr.getUser().id;
+var firstName = user.firstName;
+var profileLink = "/profile/" + user.id;
 var greetingMessage = greeting + ',&nbsp;' + firstName + '!<br> Schön, dass Du hier bist! ' + emoji;
 
 if (greetingSelector) {
