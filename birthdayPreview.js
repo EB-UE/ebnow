@@ -1,52 +1,60 @@
-(function() {
-  let birthdaySelector = document.querySelector('.external-script-widget[data-widget-id="birthdays"]');
-  birthdaySelector.innerHTML = ""
 
-  let dateformat = new Intl.DateTimeFormat('de-DE', {
-      month: '2-digit',
-      day: '2-digit'
-  })
+function birthdays() {
+const url = "https://de.eyo.net/api/users";
+const id = we.authMgr.getSessionID();
+const USER_ENTITY = "user"
+let birthdaySelector = document.querySelector('.external-script-widget[data-widget-id="birthdays"]');
+birthdaySelector.innerHTML=""
 
-  function fetchBirthdayAllUser() {
-      we.api.getUsers('limit=1')
-          .then(response => we.api.getUsers(`limit=${response.total}`)
-              .then(response => {
-                  users =
-                      response.data
-                      .filter(user => user.enabled)
-                      .filter(user => user.status == 'activated')
-                      .filter(user => user.profile)
-                      .filter(user => user.profile.geburtsdatum)
-                  for (let offset = -7; offset <= 30; offset++) {
-                      var d = new Date();
-                      d.setDate(d.getDate() + offset);
-                      displayBirthdays(users, d)
-                  }
-              })
-          );
+function loadDoc() {
+  load(-7);
+}
+  
+function load(offset) {
+  if(offset > 30) {
+    return;
   }
+  
+  const birthdayRequest = new XMLHttpRequest();
+  birthdayRequest.onreadystatechange = function() { afterFirst(birthdayRequest, offset); };
+  birthdayRequest.open("GET",url + ";wesessid=" + id + "?query=" + dateWithOffset(offset) + "&limit=10&extended=false");
+  birthdayRequest.send();
+}
 
-  function displayBirthdays(users, dateToCheck) {
-      var birthdayMessage = ''
-      users
-          .map(user => {
-              var birthdayString = user.profile.geburtsdatum
-              var dmy = birthdayString.split(".");
-              var birthday = new Date(dmy[2], dmy[1] - 1, dmy[0]);
-              if (dateToCheck.getDate() === birthday.getDate() && dateToCheck.getMonth() === birthday.getMonth()) {
-                  birthdayMessage += '<a href="/profile/' + user.id + '">' + user.firstName + ' ' + user.lastName + '</a>, ';
-              }
-          })
-
-      let startBold = ""
-      let endBold = ""
-      today = new Date()
-      if (today.getDate() === dateToCheck.getDate() && today.getMonth() === dateToCheck.getMonth()) {
-          startBold = "<strong>"
-          endBold = "</strong>"
-      }
-      birthdaySelector.innerHTML += startBold + dateformat.format(dateToCheck) + ": " + (birthdayMessage || "Keine Geburtstage 😔") + endBold + "<br>";
+function afterFirst(x, offset) {
+  if (x.readyState == 4 && x.status == 200) {
+    myAwesomeBirthdayStuff(offset, x.responseText);
+    load(offset + 1);
   }
+}
+  
+function myAwesomeBirthdayStuff(offset, responseText) {
+  let partyPopper = "";
+  if(offset == 0){
+    partyPopper = " 🎉🎉🎉 ";
+  }
+  birthdaySelector.innerHTML += dateWithOffset(offset) + ": " + partyPopper + birthdayMessage(responseText)  + "<br>";
+}
+ 
+function dateWithOffset(offset) {
+  const today = new Date();
+  today.setDate(today.getDate() + offset);
+  let currentDate = (today.getDate() <= 9 ? "0" : "" ) + today.getDate() + "." + ((today.getMonth() + 1) <= 9 ? "0" : "" ) + (today.getMonth() + 1);
+  return currentDate;
+}
 
-  fetchBirthdayAllUser()
-})();
+function birthdayMessage(responseText) {
+    const data = JSON.parse(responseText).data;
+    if (typeof data === 'undefined') {
+       return "Keine Geburtstage 😔";
+    }
+     return data
+       .filter(user => user.entityType === USER_ENTITY)
+       //.filter(user => user.profile.geburtsdatum.substring(0, 6) == dateWithOffset(offset))
+       .map(user => '<a href="/profile/' + user.id + '">' + user.firstName + ' ' + user.lastName + '</a>')
+       .join(', ');
+ }
+ 
+loadDoc();
+}
+birthdays()
