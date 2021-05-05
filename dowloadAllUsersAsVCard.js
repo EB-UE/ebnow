@@ -1,8 +1,12 @@
 allFirma = 'alle';
 
 function fetchAllUser() {
-  we.api.getUsers('limit=1')
-    .then(response => we.api.getUsers(`limit=${response.total}`)
+  we.api.getUsers({
+    limit: 1
+  })
+    .then(response => we.api.getUsers({
+      limit: response.total
+    })
       .then(response => {
         allUsers = response.data
         insertButtonAndSelect()
