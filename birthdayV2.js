@@ -18,17 +18,16 @@
     }
 
     function displayTodaysBirthdays(users) {
-        var birthdayMessage = ''
-        users
-            .map(user => {
+        var birthdayMessage = users
+            .filter(user => {
                 var birtdayString = user.profile.geburtsdatum
                 var dmy = birtdayString.split(".");
                 var birthday = new Date(dmy[2], dmy[1] - 1, dmy[0]);
                 var today = new Date()
-                if (today.getDate() === birthday.getDate() && today.getMonth() === birthday.getMonth()) {
-                    birthdayMessage += '<a href="/profile/' + user.id + '">' + user.firstName + ' ' + user.lastName + '</a> 🎉' + ' ';
-                }
+                return today.getDate() === birthday.getDate() && today.getMonth() === birthday.getMonth()
             })
+            .map(user => '<a href="/profile/' + user.id + '">' + user.firstName + ' ' + user.lastName + '🎉</a>')
+            .join(" ")
         todaysbirthdaySelector.innerHTML = birthdayMessage || "Heute hat niemand Geburtstag. Wünsche deinen Kollegen doch trotzdem einen schönen Tag 🙂"
     }
 
