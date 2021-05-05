@@ -8,8 +8,12 @@
     })
 
     function fetchBirthdayAllUser() {
-        we.api.getUsers('limit=1')
-            .then(response => we.api.getUsers(`limit=${response.total}`)
+        we.api.getUsers({
+                limit: 1
+            })
+            .then(response => we.api.getUsers({
+                    limit: response.total
+                })
                 .then(response => {
                     users =
                         response.data
@@ -18,7 +22,7 @@
                         .filter(user => user.profile)
                         .filter(user => user.profile.geburtsdatum)
                     for (let offset = -7; offset <= 30; offset++) {
-                        var d = new Date();
+                        let d = new Date();
                         d.setDate(d.getDate() + offset);
                         displayBirthdays(users, d)
                     }
@@ -27,12 +31,12 @@
     }
 
     function displayBirthdays(users, dateToCheck) {
-        var birthdayMessage =
+        let birthdayMessage =
             users
             .filter(user => {
-                var birthdayString = user.profile.geburtsdatum
-                var dmy = birthdayString.split(".");
-                var birthday = new Date(dmy[2], dmy[1] - 1, dmy[0]);
+                let birthdayString = user.profile.geburtsdatum
+                let dmy = birthdayString.split(".");
+                let birthday = new Date(dmy[2], dmy[1] - 1, dmy[0]);
                 return dateToCheck.getDate() === birthday.getDate() && dateToCheck.getMonth() === birthday.getMonth();
             })
             .map(user => '<a href="/profile/' + user.id + '">' + user.firstName + ' ' + user.lastName + '</a>')
