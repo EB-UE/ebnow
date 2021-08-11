@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2020, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,19 +11,18 @@
  * limitations under the License.
  */
 
-import { screen } from "@testing-library/dom";
+import React, { ReactElement } from "react";
 
-import "../dev/bootstrap";
-import "./index";
+/**
+ * React Component
+ */
+export interface UserWithProfileLinkProps {
+  firstName: string
+  lastName: string
+  id: string
+}
 
-describe("Widget test", () => {
-  it("should render the widget", () => {
-    const widget = document.createElement("birthday-list");
-    widget.setAttribute("daysPast", "5");
-    widget.setAttribute("daysFuture", "30");
-    document.body.appendChild(widget);
+export const UserWithProfileLink = ({ firstName, id, lastName }: UserWithProfileLinkProps): ReactElement => {
+  return <a href={"profile/" + id}>{firstName} {lastName}</a>;
+};
 
-    expect(screen.getByText(/Hello World/)).toBeInTheDocument();
-    expect(screen.getByText(/en_US/)).toBeInTheDocument();
-  });
-});

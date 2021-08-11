@@ -11,17 +11,49 @@
  * limitations under the License.
  */
 
-import React, { ReactElement } from "react";
-import { BlockAttributes } from "widget-sdk";
+import React, { ReactElement, useState, useEffect } from 'react';
+import { BirthdayEntry, UsersFromApi } from "./components/BirtdayEntry";
 
 /**
  * React Component
  */
-export interface BirthdayListProps extends BlockAttributes {
-  message: string;
+export interface BirthdayListProps {
+  daysPast: number;
+  daysFuture: number;
 }
 
-export const BirthdayList = ({ message, contentLanguage }: BirthdayListProps): ReactElement => {
-  return <div>Hello {message} {contentLanguage}</div>;
+export const BirthdayList = ({ daysPast, daysFuture }: BirthdayListProps): ReactElement => {
+  daysPast = daysPast ?? 7
+  daysFuture = daysFuture ?? 30
+
+  const dates = [];
+
+  for (let i = -daysPast; i <= daysFuture; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() + i);
+    dates.push(d);
+  }
+
+  const [users, setUsers] = useState<UsersFromApi[]>([]);
+
+  useEffect(() => {
+    function someFunction() {
+      we.api.getUsers({
+        limit: 1
+      })
+        .then(response => we.api.getUsers({
+          limit: response.total
+        })
+          .then(response => {
+            setUsers(response.data)
+          })
+        );
+    }
+    someFunction()
+  }, []);
+
+  return <div>
+    {dates.map((date) => <BirthdayEntry date={date} users={users} />)}
+  </div>;
 };
 

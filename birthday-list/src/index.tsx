@@ -23,7 +23,8 @@ import pkg from '../package.json'
  * Define wich attributes are handled by the widget. This should be also reflected in configuration schema
  */
 const widgetAttributes: string[] = [
-  'message',
+  'daysPast',
+  'daysFuture'
 ];
 
 /**
@@ -31,9 +32,7 @@ const widgetAttributes: string[] = [
  * Gets the parental class and a set of helper utilities provided by the hosting application.
  */
 const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
-  /**
-   *  <birthday-list message="world!"></birthday-list>
-   */
+
   return class BirthdayListBlock extends BaseBlockClass implements BaseBlock {
     public constructor() {
       super();
@@ -43,7 +42,6 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
       const attrs = this.parseAttributes<BirthdayListProps>();
       return {
         ...attrs,
-        contentLanguage: this.contentLanguage,
       };
     }
 
@@ -72,13 +70,13 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
  * The definition of the block, to let it successful register to the hosting application
  */
 const blockDefinition: BlockDefinition = {
-    name: "birthday-list",
-    factory: factory,
-    attributes: widgetAttributes,
-    blockLevel: 'block',
-    configurationSchema: configurationSchema,
-    uiSchema: uiSchema,
-    label: 'Birthday List'
+  name: "birthday-list",
+  factory: factory,
+  attributes: widgetAttributes,
+  blockLevel: 'block',
+  configurationSchema: configurationSchema,
+  uiSchema: uiSchema,
+  label: 'Birthday List'
 };
 
 /**
