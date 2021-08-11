@@ -50,12 +50,11 @@ export const BirthdayEntry = ({ date, users }: BirthdayEntryProps): ReactElement
     day: '2-digit'
   })
   let dateIsToday = false
-  const classname = ["birthday-entry"]
   if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
     dateIsToday = true
   }
 
-  const birthdayLine = <li className={classname.join(" ")}>{dateformat.format(date)}: <UsersWithProfileLink users={birthdayUserAtDate} /> </li>
+  const birthdayLine = <li className="birthday-entry">{dateformat.format(date)}: <UsersWithProfileLink users={birthdayUserAtDate} /> </li>
   if (dateIsToday) {
     return <strong>{birthdayLine}</strong>
   } else {
