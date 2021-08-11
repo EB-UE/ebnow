@@ -14,6 +14,7 @@
 import { BlockAttributes } from '@staffbase/widget-sdk';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { BirthdayEntry, UsersFromApi } from "./components/BirtdayEntry";
+import ClipLoader from "react-spinners/ClipLoader";
 
 /**
  * React Component
@@ -38,6 +39,7 @@ export const BirthdayList = ({ daysPast, daysFuture }: BirthdayListProps): React
   }
 
   const [users, setUsers] = useState<UsersFromApi[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     function someFunction() {
@@ -49,6 +51,7 @@ export const BirthdayList = ({ daysPast, daysFuture }: BirthdayListProps): React
         })
           .then(response => {
             setUsers(response.data)
+            setLoading(false)
           })
         );
     }
@@ -56,7 +59,7 @@ export const BirthdayList = ({ daysPast, daysFuture }: BirthdayListProps): React
   }, []);
 
   return <div>
-    {dates.map((date) => <BirthdayEntry date={date} users={users} />)}
+    {loading ? <ClipLoader loading={loading} /> : dates.map((date) => <BirthdayEntry date={date} users={users} />)}
   </div>;
 };
 

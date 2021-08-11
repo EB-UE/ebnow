@@ -17,7 +17,7 @@ import './style.css';
 
 export interface BirthdayEntryProps {
   date: Date,
-  users: Array<UsersFromApi>;
+  users: Array<UsersFromApi>,
 }
 
 export interface UsersFromApi {
