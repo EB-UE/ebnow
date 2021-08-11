@@ -1,11 +1,3 @@
 .birthday-entry {
     list-style-type: none;
 }
-
-.no-birthdays {
-    list-style-type: "😔";
-}
-
-.birthdays {
-    list-style-type: "🎉";
-}

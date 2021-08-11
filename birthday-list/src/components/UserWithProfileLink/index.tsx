@@ -23,6 +23,6 @@ export interface UserWithProfileLinkProps {
 }
 
 export const UserWithProfileLink = ({ firstName, id, lastName }: UserWithProfileLinkProps): ReactElement => {
-  return <a href={"profile/" + id}>{firstName} {lastName}</a>;
+  return <a href={"profile/" + id}>{firstName} {lastName}🎉</a>;
 };
 
