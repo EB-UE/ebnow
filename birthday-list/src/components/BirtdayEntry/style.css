@@ -1,3 +1,7 @@
-.birthday-entry {
+li.birthday-entry {
     list-style-type: none;
+}
+
+li.today {
+    font-weight: bold;
 }

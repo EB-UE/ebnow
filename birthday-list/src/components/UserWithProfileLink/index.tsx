@@ -12,6 +12,7 @@
  */
 
 import React, { ReactElement } from "react";
+import "./style.css"
 
 /**
  * React Component
@@ -23,6 +24,6 @@ export interface UserWithProfileLinkProps {
 }
 
 export const UserWithProfileLink = ({ firstName, id, lastName }: UserWithProfileLinkProps): ReactElement => {
-  return <a href={"profile/" + id}>{firstName} {lastName}🎉</a>;
+  return <a className="user-with-profile-link" href={"profile/" + id}>{firstName} {lastName}</a>;
 };
 
