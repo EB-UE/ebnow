@@ -11,13 +11,14 @@
  * limitations under the License.
  */
 
+import { BlockAttributes } from '@staffbase/widget-sdk';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { BirthdayEntry, UsersFromApi } from "./components/BirtdayEntry";
 
 /**
  * React Component
  */
-export interface BirthdayListProps {
+export interface BirthdayListProps extends BlockAttributes {
   daysPast: number;
   daysFuture: number;
 }
