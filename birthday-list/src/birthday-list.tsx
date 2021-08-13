@@ -11,7 +11,6 @@
  * limitations under the License.
  */
 
-import { BlockAttributes } from '@staffbase/widget-sdk';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { BirthdayEntry, UsersFromApi } from "./components/BirtdayEntry";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -19,14 +18,13 @@ import ClipLoader from "react-spinners/ClipLoader";
 /**
  * React Component
  */
-export interface BirthdayListProps extends BlockAttributes {
+export interface BirthdayListProps {
   dayspast: number;
   daysfuture: number;
 }
 
 export const BirthdayList = ({ dayspast, daysfuture }: BirthdayListProps): ReactElement => {
 
-  debugger
   dayspast = dayspast ?? 7
   daysfuture = daysfuture ?? 30
 
