@@ -5,7 +5,7 @@ import { BirthdayList } from "./birthday-list";
 
 describe("BirthdayList", () => {
     it("should render the component", () => {
-        render(<BirthdayList daysPast={7} daysFuture={30} />);
+        render(<BirthdayList dayspast={7} daysfuture={30} />);
 
         expect(screen.getByText(/Hello World/)).toBeInTheDocument();
     })

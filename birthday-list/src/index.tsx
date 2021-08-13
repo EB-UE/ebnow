@@ -23,8 +23,8 @@ import pkg from '../package.json'
  * Define wich attributes are handled by the widget. This should be also reflected in configuration schema
  */
 const widgetAttributes: string[] = [
-  'daysPast',
-  'daysFuture'
+  'dayspast',
+  'daysfuture'
 ];
 
 /**

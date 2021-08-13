@@ -19,8 +19,8 @@ import "./index";
 describe("Widget test", () => {
   it("should render the widget", () => {
     const widget = document.createElement("birthday-list");
-    widget.setAttribute("daysPast", "5");
-    widget.setAttribute("daysFuture", "30");
+    widget.setAttribute("dayspast", "5");
+    widget.setAttribute("daysfuture", "30");
     document.body.appendChild(widget);
 
     expect(screen.getByText(/Hello World/)).toBeInTheDocument();

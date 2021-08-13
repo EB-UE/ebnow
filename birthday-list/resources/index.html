@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.png">
@@ -10,32 +11,35 @@
     <link href="/css/libs.css" rel="stylesheet">
     <link href="/css/font.css" rel="stylesheet">
     <style>
-      body {
-        padding: 50px;
-      }
-      .box {
-        border: 2px dashed gray;
-        padding: 40px;
-      }
+        body {
+            padding: 50px;
+        }
+        
+        .box {
+            border: 2px dashed gray;
+            padding: 40px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
-      <div class="box">
-        <h3>Widget preview:</h3>
-        <br />
-        <br />
-        <section id="preview">
-            <birthday-list message="world!"></birthday-list>
-        </section>
-      </div>
-      <div class="box">
-      <h3>Configuration preview:</h3>
-        <section id="config"></section>
-      </div>
+        <div class="box">
+            <h3>Widget preview:</h3>
+            <br />
+            <br />
+            <section id="preview">
+                <birthday-list dayspast="7" daysfuture=14></birthday-list>
+            </section>
+        </div>
+        <div class="box">
+            <h3>Configuration preview:</h3>
+            <section id="config"></section>
+        </div>
     </div>
-  </body>
-  <script src="bootstrap.js"></script>
-  <script src="eb.birthday-list.js"></script>
-  <script src="config.js"></script>
+</body>
+<script src="bootstrap.js"></script>
+<script src="eb.birthday-list.js"></script>
+<script src="config.js"></script>
+
 </html>

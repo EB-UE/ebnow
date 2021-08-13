@@ -20,18 +20,19 @@ import ClipLoader from "react-spinners/ClipLoader";
  * React Component
  */
 export interface BirthdayListProps extends BlockAttributes {
-  daysPast: number;
-  daysFuture: number;
+  dayspast: number;
+  daysfuture: number;
 }
 
-export const BirthdayList = ({ daysPast, daysFuture }: BirthdayListProps): ReactElement => {
+export const BirthdayList = ({ dayspast, daysfuture }: BirthdayListProps): ReactElement => {
 
-  daysPast = daysPast ?? 7
-  daysFuture = daysFuture ?? 30
+  debugger
+  dayspast = dayspast ?? 7
+  daysfuture = daysfuture ?? 30
 
   const dates = [];
 
-  for (let i = -daysPast; i <= daysFuture; i++) {
+  for (let i = -dayspast; i <= daysfuture; i++) {
     const d = new Date();
     d.setDate(d.getDate() + i);
     dates.push(d);

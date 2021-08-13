@@ -20,12 +20,12 @@ import { JSONSchema7 } from "json-schema";
  */
 export const configurationSchema: JSONSchema7 = {
   properties: {
-    daysPast: {
+    dayspast: {
       type: "number",
       title: "Tage zurück",
       default: 7
     },
-    daysFuture: {
+    daysfuture: {
       type: "number",
       title: "Tage vor",
       default: 30
@@ -38,10 +38,10 @@ export const configurationSchema: JSONSchema7 = {
  * @see https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/
  */
 export const uiSchema: UiSchema = {
-  daysPast: {
+  dayspast: {
     "ui:help": "Wie viele Tage zurück blicken?",
   },
-  daysFuture: {
+  daysfuture: {
     "ui:help": "Wie viele Tage vouraus blicken?",
   },
 };
