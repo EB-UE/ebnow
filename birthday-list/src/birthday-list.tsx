@@ -25,8 +25,7 @@ export interface BirthdayListProps extends BlockAttributes {
 }
 
 export const BirthdayList = ({ daysPast, daysFuture }: BirthdayListProps): ReactElement => {
-  console.log(daysPast)
-  console.log(daysFuture)
+
   daysPast = daysPast ?? 7
   daysFuture = daysFuture ?? 30
 
