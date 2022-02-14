@@ -18,7 +18,7 @@ var x = setInterval(function() {
 
   // Display the result in the element with id="countdown"
   var countdownSelector = document.querySelector('.external-script-widget[data-widget-id="countdown"]');
-  var countdownMessage = "Noch " + days + " Tage\n Gemeinsam für Morgen";
+  var countdownMessage = "Noch " + days + " Tage<br> Gemeinsam für Morgen";
     
   if(countdownSelector) {
     countdownSelector.innerHTML = countdownMessage;
