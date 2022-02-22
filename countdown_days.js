@@ -14,6 +14,6 @@ if(countdownSelector) {
 }
 
 // If the count down is finished, write some text
-if (distance <= 0) {
+if (difference <= 0) {
   countdownSelector.innerHTML = "Heute findet die Mitarbeiterveranstaltung statt!";
 }
