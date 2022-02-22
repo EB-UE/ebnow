@@ -6,8 +6,14 @@ var days = Math.ceil(difference / (1000 * 3600 * 24));
 
 
 // Display the result in the element with id="countdown"
+if(days > 1) {
+var tagOderTage = " Tage"
+} else {
+var tagOderTage = " Tag"
+    }
+
 var countdownSelector = document.querySelector('.external-script-widget[data-widget-id="countdown"]');
-var countdownMessage = "Noch " + days + " Tage<br> Gemeinsam für Morgen";
+var countdownMessage = "Noch " + days + tagOderTage + "<br> Gemeinsam für Morgen";
     
 if(countdownSelector) {
   countdownSelector.innerHTML = countdownMessage;
