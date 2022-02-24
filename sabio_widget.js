@@ -41,3 +41,9 @@ var __loadJs = function(url, cb) {
 __loadJs('https://eb.sabio.de/sabio/services/widget/bundle.js', function() {
     __initConnection();
 });
+
+var countdownSelector = document.querySelector('.external-script-widget[data-widget-id="sabio"]');
+    
+if(countdownSelector) {
+  countdownSelector.innerHTML = countdownMessage;
+}
