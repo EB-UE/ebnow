@@ -1,0 +1,13 @@
+(function() {
+  let suchWidget='<sw-knowledge-search></sw-knowledge-search>'
+  let automatischesSuchWidget='<sw-knowledge-auto-search></sw-knowledge-auto-search>'
+  let filterWidget='<sw-knowledge-filter></sw-knowledge-filter>'
+  let ergebnislistenWidget='<sw-knowledge-result-list></sw-knowledge-result-list>'
+  let detailansichtWidget='<sw-knowledge-detail></sw-knowledge-detail>'
+  let baumWidget='<sw-knowledge-tree view-mode="grid"></sw-knowledge-tree>'
+
+
+  let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegration"]');
+  sabiosucheintegrationSelector.innerHTML = `${suchWidget}${baumWidget}${detailansichtWidget}`
+
+})();
