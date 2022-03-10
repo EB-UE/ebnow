@@ -11,8 +11,8 @@
   sabiosucheintegrationSelector.innerHTML = `${suchWidget}${detailansichtWidget}${baumWidget}`
 
   
-  let sabiostyle = '<style>.button,button{ width:80%; }</style>'
-  let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegrationstyle"]');
-  sabiosucheintegrationSelector.innerHTML = `${sabiostyle}`
+  let sabiostyle = '<style>.button,button{ width:unset; }</style>'
+  let sabiosucheintegrationstyleSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegrationstyle"]');
+  sabiosucheintegrationstyleSelector.innerHTML = `${sabiostyle}`
 
 })();
