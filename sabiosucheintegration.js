@@ -10,4 +10,9 @@
   let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegration"]');
   sabiosucheintegrationSelector.innerHTML = `${suchWidget}${detailansichtWidget}${baumWidget}`
 
+  
+  let sabiostyle = '<style>.button,button{ width:80%; }</style>'
+  let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegrationstyle"]');
+  sabiosucheintegrationSelector.innerHTML = `${sabiostyle}`
+
 })();
