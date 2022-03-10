@@ -8,6 +8,6 @@
 
 
   let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegration"]');
-  sabiosucheintegrationSelector.innerHTML = `${suchWidget}${baumWidget}${detailansichtWidget}`
+  sabiosucheintegrationSelector.innerHTML = `${suchWidget}${detailansichtWidget}${baumWidget}`
 
 })();
