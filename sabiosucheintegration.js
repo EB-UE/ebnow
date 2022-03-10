@@ -4,7 +4,7 @@
   let filterWidget='<sw-knowledge-filter></sw-knowledge-filter>'
   let ergebnislistenWidget='<sw-knowledge-result-list></sw-knowledge-result-list>'
   let detailansichtWidget='<sw-knowledge-detail></sw-knowledge-detail>'
-  let baumWidget='<sw-knowledge-tree view-mode="grid"></sw-knowledge-tree>'
+  let baumWidget='<sw-knowledge-tree></sw-knowledge-tree>'
 
 
   let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegration"]');
