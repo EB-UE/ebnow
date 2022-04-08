@@ -8,7 +8,7 @@
 
 
   let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegration"]');
-  sabiosucheintegrationSelector.innerHTML = `${suchWidget}${ergebnislistenWidget}${baumWidget}`
+  sabiosucheintegrationSelector.innerHTML = `${suchWidget}${ergebnislistenWidget}${detailansichtWidget}${baumWidget}`
 
   
   let sabiostyle = '<style>.button,button{ width:unset; }</style>'
