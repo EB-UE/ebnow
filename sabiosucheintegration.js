@@ -20,7 +20,7 @@
     {
         ebnowhiddenCls = 'ebnowhidden'
         var style = document.createElement('style');
-        style.innerHTML = `${ebnowhiddenCls} { display: none; }`;
+        style.innerHTML = `.${ebnowhiddenCls} { display: none; }`;
         document.head.appendChild(style);
     }
 
