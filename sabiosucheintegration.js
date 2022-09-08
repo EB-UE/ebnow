@@ -18,26 +18,49 @@
 
 
 
-    // für detailansicht die Fehlermeldung anzeigen
-    const targetNode = document.querySelector('sw-knowledge-detail mat-accordion');
+    waitForElm('sw-knowledge-detail mat-accordion').then((elm) => {
+        const targetNode = elm;
 
-    // Callback function to execute when mutations are observed
-    const callback = (mutationList, observer) => {
-        document.getElementById('keineTreffer')?.remove();
-        if (targetNode.childElementCount === 0) {
-            targetNode.insertAdjacentHTML("afterend", '<p id="keineTreffer">Oops... dieser Inhalt existiert noch nicht – bitte einen Redakteur diesen zu erstellen.</p>');
-        }
-    };
 
-    const observer = new MutationObserver(callback);
+        const origOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function() {
+            this.addEventListener('load', function() {
+                if (this.responseURL.startsWith('https://eb.sabio.de/sabio/services/text?')) {
+                    if (this.responseURL.includes('q=*') == false) {
+                        const jsonResponse = JSON.parse(this.responseText)
+                        if (jsonResponse?.success === true) {
+                            document.getElementById('keineTreffer')?.remove();
+                            if (jsonResponse?.data?.total === 0) {
+                                targetNode.insertAdjacentHTML("afterend", '<p id="keineTreffer">Oops... dieser Inhalt existiert noch nicht – bitte einen Redakteur diesen zu erstellen.</p>');
+                            }
+                        }
+                    }
+                }
+            });
+            origOpen.apply(this, arguments);
+        };
+    });
 
-    // Options for the observer (which mutations to observe)
-    const config = {
-        attributes: false,
-        childList: true,
-        subtree: false
-    };
+    // https://stackoverflow.com/a/61511955
+    function waitForElm(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
 
-    observer.observe(targetNode, config);
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
+
 
 })();
