@@ -16,11 +16,12 @@
     sabiosucheintegrationstyleSelector.innerHTML = `${sabiostyle}`;
 
 
-    // https://stackoverflow.com/a/707794
+    // https://stackoverflow.com/a/707580
     {
-        ebnowhiddenCls='ebnowhidden'
-        var sheet = window.document.styleSheets[0];
-        sheet.insertRule(`${ebnowhiddenCls} { display: none; }`, sheet.cssRules.length);
+        ebnowhiddenCls = 'ebnowhidden'
+        var style = document.createElement('style');
+        style.innerHTML = `${ebnowhiddenCls} { display: none; }`;
+        document.head.appendChild(style);
     }
 
 
