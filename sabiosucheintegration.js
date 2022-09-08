@@ -16,10 +16,28 @@
     sabiosucheintegrationstyleSelector.innerHTML = `${sabiostyle}`;
 
 
+    // https://stackoverflow.com/a/707794
+    {
+        ebnowhiddenCls='ebnowhidden'
+        var sheet = window.document.styleSheets[0];
+        sheet.insertRule(`${ebnowhiddenCls} { display: none; }`, sheet.cssRules.length);
+    }
+
+
 
 
     waitForElm('sw-knowledge-detail mat-accordion').then((elm) => {
         const targetNode = elm;
+
+        // https://stackoverflow.com/a/35385518
+        {
+            var template = document.createElement('template');
+            template.innerHTML = `<p id="keineTreffer" class="${ebnowhiddenCls}">Oops... dieser Inhalt existiert noch nicht – bitte einen Redakteur diesen zu erstellen.</p>`;
+            keineTrefferElement = template.content.firstChild;
+        }
+
+        targetNode.parentNode.insertBefore(keineTrefferElement, targetNode.nextSibling)
+
 
         // override open of XHR, so we intercept the response
         const origOpen = XMLHttpRequest.prototype.open;
@@ -29,9 +47,9 @@
                     if (istKeineSabioSternSuchanfrage(this.responseURL)) {
                         const jsonResponse = JSON.parse(this.responseText)
                         if (jsonResponse?.success === true) {
-                            document.getElementById('keineTreffer')?.remove();
+                            document.getElementById('keineTreffer')?.removeCls(ebnowhiddenCls);
                             if (jsonResponse?.data?.total === 0) {
-                                targetNode.insertAdjacentHTML("afterend", '<p id="keineTreffer">Oops... dieser Inhalt existiert noch nicht – bitte einen Redakteur diesen zu erstellen.</p>');
+                                document.getElementById('keineTreffer')?.addCls(ebnowhiddenCls);
                             }
                         }
                     }
