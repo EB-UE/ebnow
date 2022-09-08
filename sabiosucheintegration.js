@@ -21,12 +21,12 @@
     waitForElm('sw-knowledge-detail mat-accordion').then((elm) => {
         const targetNode = elm;
 
-
+        // override open of XHR, so we intercept the response
         const origOpen = XMLHttpRequest.prototype.open;
         XMLHttpRequest.prototype.open = function() {
             this.addEventListener('load', function() {
-                if (this.responseURL.startsWith('https://eb.sabio.de/sabio/services/text?')) {
-                    if (this.responseURL.includes('q=*') == false) {
+                if (istSabioSuchanfrage(this.responseURL)) {
+                    if (istKeineSabioSternSuchanfrage(this.responseURL)) {
                         const jsonResponse = JSON.parse(this.responseText)
                         if (jsonResponse?.success === true) {
                             document.getElementById('keineTreffer')?.remove();
@@ -40,6 +40,14 @@
             origOpen.apply(this, arguments);
         };
     });
+
+    function istSabioSuchanfrage(responseURL) {
+        return responseURL.startsWith('https://eb.sabio.de/sabio/services/text?')
+    }
+
+    function istKeineSabioSternSuchanfrage(responseURL) {
+        return responseURL.includes('q=*') == false
+    }
 
     // https://stackoverflow.com/a/61511955
     function waitForElm(selector) {
