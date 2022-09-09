@@ -33,7 +33,7 @@
         // https://stackoverflow.com/a/35385518
         {
             var template = document.createElement('template');
-            template.innerHTML = `<p id="keineTreffer" class="${ebnowhiddenCls}">Oops... dieser Inhalt existiert noch nicht – bitte einen Redakteur diesen zu erstellen.</p>`;
+            template.innerHTML = `<p id="keineTreffer" class="${ebnowhiddenCls}">Oops... nichts gefunden 🤷‍ – bitte den Fachbereich den Inhalt zu erstellen.</p>`;
             keineTrefferElement = template.content.firstChild;
         }
 
