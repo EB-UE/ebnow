@@ -48,9 +48,9 @@
                     if (istKeineSabioSternSuchanfrage(this.responseURL)) {
                         const jsonResponse = JSON.parse(this.responseText)
                         if (jsonResponse?.success === true) {
-                            document.getElementById('keineTreffer')?.removeCls(ebnowhiddenCls);
+                            document.getElementById('keineTreffer')?.addCls(ebnowhiddenCls);
                             if (jsonResponse?.data?.total === 0) {
-                                document.getElementById('keineTreffer')?.addCls(ebnowhiddenCls);
+                                document.getElementById('keineTreffer')?.removeCls(ebnowhiddenCls);
                             }
                         }
                     }
