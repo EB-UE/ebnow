@@ -23,7 +23,7 @@ EMAIL:${email}
 END:VCARD`;
 
 // Create a container element for the QR code
-const qrCodeElement = document.createElement('div');
+const qrCodeElement = document.getElementById("fuchscard");
 
 // Generate the QR code
 new QRCode(qrCodeElement, vCard);
