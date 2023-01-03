@@ -35,7 +35,7 @@ function generateAndDisplayContactQrCode() {
         logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAYFBMVEX////49vnw6/Lw7PL39fj28/e+qsi0nb+0nsDd0+Pe1OPd0+Lt6PDq5O1vQ4RXJHFZJnLe0+NwRIVaKHNwRIbq4+1uQoRWI3BYJXH18/f08PWxmr2lirOmi7OlibOmirPj32u9AAAA8UlEQVRYw+3Y2QqEMAwF0Fj3vVZb19H//8tB6Dwl6DB0UDD3NdzzVEgowCPjCR9HBABhFCcocRQCBGTFs6BIM5y8ACirWqLUVQlQ5EQlFRb0iWHW7KCSLYpUO9hQHf8U7CiwY5BBBhlk8CpQ5A3OvlO06QeU3uh9p1CVz04JCiojwDQvL5RlngBGshJcvb+/TlgS0dNRZdJUJ7TTqFIdipmPwNnghqoiO42J+0D26xG49kSlju00IV5bO2xH4DYQFZkwyCCDDDL4X9D5CnC+pJyv0fvH+bHk/Jy7/wXLIIMMMsjgGfjjp67zb2fnH+MPyxvBVPJppv4sYwAAAABJRU5ErkJggg==',
     };
     
-	new QRCode(document.getElementById("vCardGiroCode"), options);
+	new QRCode(document.getElementById("vCardEbnow"), options);
 }
 
 function importVCardLib() {
