@@ -2,7 +2,7 @@
     let suchWidget = '<sw-knowledge-search react-on-events="false" show-suggestions="false" limit="5" placeholder="Bitte gib hier deinen Suchbegriff ein" view-mode="bordered"> </sw-knowledge-search>';
     let automatischesSuchWidget = '<sw-knowledge-auto-search></sw-knowledge-auto-search>';
     let filterWidget = '<sw-knowledge-filter></sw-knowledge-filter>';
-    let ergebnislistenWidget = '<sw-knowledge-result-list view-mode="card" show-header="false" show-flat="true" empty-text="Bitte versuche es noch einmal..." columns="title;excerpt;treePath"> </sw-knowledge-result-list>';
+    let ergebnislistenWidget = '<sw-knowledge-result-list view-mode="card" show-header="false" empty-text="Bitte versuche es noch einmal..." columns="title;excerpt;treePath"> </sw-knowledge-result-list>';
     let detailansichtWidget = '<sw-knowledge-detail auto-dialog="true" dialog-title="EB-Wissensartikel" dialog-message=" " auto-expand-foldouts="true" show-path="false" view-mode="simple"> </sw-knowledge-detail>';
     let baumWidget = '<sw-knowledge-tree view-mode="list" bordered-grid="true" load-navigation-url="false"> </sw-knowledge-tree>';
 
