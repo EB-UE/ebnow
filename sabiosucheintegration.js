@@ -1,17 +1,14 @@
 (function() {
-    let suchWidget = '<sw-knowledge-search react-on-events="false" show-suggestions="false" limit="5" placeholder="Bitte gib hier deinen Suchbegriff ein" view-mode="bordered"> </sw-knowledge-search>';
+    let suchWidget = '<sw-knowledge-search></sw-knowledge-search>';
     let automatischesSuchWidget = '<sw-knowledge-auto-search></sw-knowledge-auto-search>';
     let filterWidget = '<sw-knowledge-filter></sw-knowledge-filter>';
-    let ergebnislistenWidget = '<sw-knowledge-result-list view-mode="card" show-header="false" show-flat="true" empty-text="Bitte versuche es noch einmal..." columns="title;excerpt;treePath"> </sw-knowledge-result-list>';
-    let detailansichtWidget = '<sw-knowledge-detail auto-dialog="true" dialog-title="EB-Wissensartikel" dialog-message=" " auto-expand-foldouts="true" show-path="false" view-mode="simple"> </sw-knowledge-detail>';
-    let baumWidget = '<sw-knowledge-tree bordered-grid="true" load-navigation-url="false"> </sw-knowledge-tree>';
-
-
-    
+    let ergebnislistenWidget = '<sw-knowledge-result-list view-mode="card" show-top-border="false" header="Ergebnisliste" auto-open-result="false" empty-text="Ooops...kein Treffer vorhanden" highlight="false"> </sw-knowledge-result-list>';
+    let detailansichtWidget = '<sw-knowledge-detail expanded="false" show-path="false" single-expand="true"></sw-knowledge-detail>';
+    let baumWidget = '<sw-knowledge-tree></sw-knowledge-tree>';
 
 
     let sabiosucheintegrationSelector = document.querySelector('.external-script-widget[data-widget-id="sabiosucheintegration"]');
-    sabiosucheintegrationSelector.innerHTML = `${baumWidget}${detailansichtWidget}${suchWidget}${ergebnislistenWidget}`;
+    sabiosucheintegrationSelector.innerHTML = `${suchWidget}${detailansichtWidget}`;
 
 
     let sabiostyle = '<style>.button,button{ width:unset; }</style>'
