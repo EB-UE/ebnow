@@ -4,7 +4,7 @@
     let filterWidget = '<sw-knowledge-filter></sw-knowledge-filter>';
     let ergebnislistenWidget = '<sw-knowledge-result-list view-mode="card" show-header="false" show-flat="true" empty-text="Bitte versuche es noch einmal..." columns="title;excerpt;treePath"> </sw-knowledge-result-list>';
     let detailansichtWidget = '<sw-knowledge-detail auto-dialog="true" dialog-title="EB-Wissensartikel" dialog-message=" " auto-expand-foldouts="true" show-path="false" view-mode="simple"> </sw-knowledge-detail>';
-    let baumWidget = '<sw-knowledge-tree bordered-grid="true" load-navigation-url="false"> </sw-knowledge-tree>';
+    let baumWidget = '<sw-knowledge-tree view-mode="list" bordered-grid="true" load-navigation-url="false"> </sw-knowledge-tree>';
 
 
     
