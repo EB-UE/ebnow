@@ -1,4 +1,4 @@
-const html = ```<div id="slotbuddy">
+const html = `<div id="slotbuddy">
   <div class="container">
     <div class="slotcontainer">
       <div class="text-slot" id="text0">Wie können wir</div>
@@ -25,9 +25,9 @@ const html = ```<div id="slotbuddy">
         <div class="lever"></div>
       </div>
     </div>
-  </div>```;
+  </div>`;
 
-const css = ```
+const css = `
 
 #slotbuddy {
     background: white;
@@ -157,8 +157,8 @@ const css = ```
     margin-left: 10px;
 }
 
-```;
-const js = ```const slotSymbols = [
+`;
+const js = `const slotSymbols = [
   ['Neukunden', 'Bestandskunden', '(potentielle) Mitarbeitende'],
   ['Corporate Story', 'NH-Expertise', 'Arbeitgebermarke'],
   ['Nutzung von Ertragspotentialen', 'Effektivitätssteigerung & Kostensenkung', 'Stärkung der Nachhaltigkeit als Basis des Geschäftsmodells', 'Förderung der Zusammenarbeit mit der EB']
@@ -272,7 +272,7 @@ document.querySelector('.levertip').addEventListener('click', function () {
   spin();
 })
 
-generate();```;
+generate();`;
 
 document.addEventListener("DOMContentLoaded", (event) => {
  var slotmachine = document.querySelector('.external-script-widget[data-widget-id="slotmachine"]');
