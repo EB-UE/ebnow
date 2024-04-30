@@ -208,7 +208,7 @@ function generate() {
       symbols.appendChild(createSymbolElement(symbol));
     });
 
-    symbols.style.transitionDelay = ${transitionDelay * index}ms;
+    symbols.style.transitionDelay = \`${transitionDelay * index}ms\`;
   });
 }
 
@@ -226,7 +226,7 @@ function spin() {
 
       const totalDistance = symbolCount * symbolHeight;
       const randomOffset = -(symbolCount - 3) * symbolHeight;
-      symbols.style.top = ${randomOffset}px;
+      symbols.style.top = \`${randomOffset}px\`;
 
       symbols.addEventListener('transitionend', () => {
         completedSlots++;
