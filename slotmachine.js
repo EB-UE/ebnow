@@ -275,7 +275,7 @@ document.querySelector('.levertip').addEventListener('click', function () {
 generate();`;
 
 document.addEventListener("DOMContentLoaded", (event) => {
- var slotmachine = document.querySelector('.external-script-widget[data-widget-id="slotmachine"]');
+ var slotmachine = document.querySelector('#slotmachine');
 slotmachine.innerHTML = html;
 
 var styleSheet = document.createElement("style");
