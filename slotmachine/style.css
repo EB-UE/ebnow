@@ -80,7 +80,7 @@
 
 .slot .symbol {
   width: 150px;
-  height: 80px; /* Adjust height if necessary */
+  height: 70px; /* Adjust height if necessary */
   display: flex;
   justify-content: center;
   align-items: center;
