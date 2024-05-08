@@ -1,6 +1,6 @@
 /* design credit: https://codepen.io/1isten/pen/wvMdNPp */
 
-body {
+slotbuddy {
     background: white;
     margin: 0;
     padding: 0;
@@ -9,8 +9,8 @@ body {
     font-weight: bold;
 }
 .text-slot {
-  width: 130px;
-  height: 100px;
+  width: 70px;
+  height: 80px;
   /*border-radius: 10px;*/
   display: flex;
   flex-direction: column;
@@ -21,15 +21,15 @@ body {
   background: #007f8c;
   padding: 10px; /* Padding to prevent text from touching the edges */
   box-sizing: border-box; /* Include padding in width/height calculations */
-  font-size: 13px; /* Adjust font size as necessary */
+  font-size: 9px; /* Adjust font size as necessary */
   color: white;
   text-align: center; /* Center text horizontally */
   word-wrap: break-word; /* Ensure long words do not overflow */
 }
 
 .last-slot {
-  width: 80px;
-  height: 100px;
+  width: 30px;
+  height: 80px;
   /*border-radius: 10px;*/
   display: flex;
   flex-direction: column;
@@ -58,9 +58,9 @@ body {
 }
 
 .slot {
-    width: 150px;
-    height: 300px;
-    border: 10px solid #023F46;
+    width: 100px;
+    height: 240px;
+    border: 5px solid #023F46;
     border-radius: 15px;
     display: inline-block;
     overflow: hidden;
@@ -77,14 +77,14 @@ body {
 }
 
 .slot .symbol {
-  width: 150px;
-  height: 85px; /* Adjust height if necessary */
+  width: 100px;
+  height: 65px; /* Adjust height if necessary */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10%;
   box-sizing: border-box; /* Include padding in width/height calculations */
-  font-size: 13px;
+  font-size: 9px;
   text-align: center; /* Center text horizontally */
   word-wrap: break-word; /* Ensure long words do not overflow */
   overflow: hidden; /* Hide overflow text to maintain slot aesthetics */  
@@ -95,12 +95,12 @@ body {
 
 .levercontainer {
     position: relative;
-    margin-left: 20px;
+    margin-left: 0px;
 }
 
 .lever {
     background: grey;
-    height: 250px;
+    height: 200px;
     width: 25px;
     border-radius: 10px;
     margin-top: -40px;
@@ -127,3 +127,4 @@ body {
     border-radius: 5px;
     margin-left: 10px;
 }
+
