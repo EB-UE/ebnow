@@ -1,23 +1,22 @@
-(function() {
+(async function () {
     let todaysbirthdaySelector = document.querySelector('.external-script-widget[data-widget-id="birthday"]');
     todaysbirthdaySelector.innerHTML = ""
 
-    function fetchAllUserForToday() {
-        we.api.getUsers({
-                limit: 1
-            })
-            .then(response => we.api.getUsers({
-                    limit: response.total
-                })
-                .then(response => {
-                    users = response.data
-                        .filter(user => user.enabled)
-                        .filter(user => user.status == 'activated')
-                        .filter(user => user.profile)
-                        .filter(user => user.profile.geburtsdatum)
-                    displayTodaysBirthdays(users)
-                })
-            );
+    async function fetchAllUserForToday() {
+        const responseToGetMaxUserCount = await we.api.getUsers({
+            limit: 1
+        });
+
+        const allUsers = await we.api.getUsers({
+            limit: responseToGetMaxUserCount.total
+        })
+
+        const relevantUsers =
+            allUsers.data
+                // .filter(user => user.enabled) // no property anymore
+                .filter(user => user.status == 'activated')
+                .filter(user => user.profile?.geburtsdatum)
+                displayTodaysBirthdays(relevantUsers)
     }
 
     function displayTodaysBirthdays(users) {
