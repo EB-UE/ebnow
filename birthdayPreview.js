@@ -1,4 +1,4 @@
-await (async function () {
+(async function () {
     const birthdaySelector = document.querySelector('.external-script-widget[data-widget-id="birthdays"]');
     birthdaySelector.innerHTML = ""
 
