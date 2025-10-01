@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experten-Quiz: Kundenbetreuung Liquiditätsmanagement - Evangelische Bank e.G.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+        /* === FARBPALETTE: LILA UND WEISS === */
+        :root {
+            --primary-purple: #6a0dad; /* Dunkles Lila für Titel und Hauptbuttons */
+            --light-purple: #e0b0ff;   /* Helles Lila für Akzente und Hintergründe */
+            --white: #ffffff;
+            --off-white: #f8f8f8;      /* Leichter Grauton für den Body-Hintergrund */
+            --text-color: #333333;
+            --border-color: #cccccc;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--off-white);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px; 
+            border-bottom: 2px solid var(--light-purple); 
+            padding-bottom: 20px;
+        }
+
+        header img {
+            height: 60px; 
+        }
+
+        #quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-purple); 
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.2em; 
+        }
+
+        h2 {
+            color: var(--text-color);
+            font-size: 1.6em;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .options li {
+            background-color: #f0f0f0; 
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options li:hover {
+            background-color: #e6e6e6; 
+        }
+        
+        .options li.correct {
+            background-color: #d8c2e6; 
+            border-color: var(--primary-purple); 
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        .answer {
+            background-color: #f2e6ff; 
+            border-left: 5px solid var(--primary-purple); 
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: var(--primary-purple); 
+            color: var(--white);
+            border: none;
+            padding: 14px 28px; 
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 0 10px;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+        
+        button.show-answer-btn {
+            background-color: var(--light-purple); 
+            color: var(--text-color); 
+        }
+        
+        button:disabled {
+            background-color: var(--border-color); 
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        button:hover:not(:disabled) {
+            opacity: 0.85; 
+        }
+
+        #scoreboard {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--white); 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .team {
+            text-align: center;
+        }
+
+        .team h3 {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+        }
+
+        .team .score {
+            font-size: 2.5em; 
+            font-weight: bold;
+            color: var(--primary-purple); 
+        }
+
+        .team button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: var(--light-purple); 
+            color: var(--text-color);
+        }
+        
+        #end-screen {
+            display: none;
+            text-align: center;
+        }
+        
+        #end-screen h2 {
+            font-size: 2.5em;
+            color: var(--primary-purple); 
+        }
+        
+        #winner-text {
+            font-size: 1.8em;
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--primary-purple);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://www.eb.de/etc/designs/eb/img/logo-eb.svg" alt="Logo Evangelische Bank">
+    </header>
+
+    <h1>Experten-Quiz: Liquiditätsmanagement</h1>
+
+    <div id="quiz-container">
+        <div class="question-container active">
+            <h2>Frage 1: Zahlungsverkehr</h2>
+            <p>Welches Dateiformat wird typischerweise für den Austausch von Sammelüberweisungen und -lastschriften im SEPA-Raum verwendet?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Das XML-Format (z.B. pain.001 für Überweisungen und pain.008 für Lastschriften). Es hat die alten DTA-Formate abgelöst.</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <h2>Frage 2: Cash Management</h2>
+            <p>Was versteht man unter dem Begriff "Cash Pooling"?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Die Bündelung der Liquidität von verschiedenen Konten eines Unternehmens oder Konzerns auf einem zentralen Konto (Master-Account), um den Zinsaufwand zu minimieren und die Liquidität optimal zu steuern.</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 3: Auslandszahlungsverkehr</h2>
+            <p>Ein Kunde möchte eine Zahlung in die USA in US-Dollar tätigen. Welchen Code, der die Empfängerbank eindeutig identifiziert, benötigen wir zwingend?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Den SWIFT-Code (auch BIC - Bank Identifier Code genannt). Für die USA wird oft zusätzlich eine "Routing Number" (ABA) benötigt.</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 4: Zahlungsverkehrslösungen</h2>
+            <p>Nennen Sie mindestens eine Zahlungsverkehrssoftware, die unsere Kunden für die Abwicklung ihres Zahlungsverkehrs nutzen können.</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Mögliche Antworten sind z.B. Profi cash, SFirm, oder unser EB-Finanzportal.</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 5: Buchhaltungssoftwares</h2>
+            <p>Welche Schnittstelle ermöglicht es einer Buchhaltungssoftware (z.B. DATEV), direkt auf Kontoinformationen zuzugreifen und Zahlungen anzustoßen?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> FinTS (Financial Transaction Services) oder alternativ EBICS (Electronic Banking Internet Communication Standard) für Firmenkunden.</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 6: Kreditkarten</h2>
+            <p>Was ist der Hauptunterschied zwischen einer Debit- und einer echten Kreditkarte in Bezug auf die Abrechnung der Umsätze?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Bei einer Debitkarte wird der Betrag sofort oder zeitnah vom Girokonto abgebucht. Bei einer echten Kreditkarte werden die Umsätze gesammelt und einmal im Monat in einer Summe abgerechnet (Kreditfunktion).</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 7: Onlinebanking</h2>
+            <p>Welches TAN-Verfahren gilt aktuell als besonders sicher, da es über einen separaten Kanal (eine App auf dem Smartphone) läuft?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Das App-basierte TAN-Verfahren, wie z.B. SecureGo plus.</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <h2>Frage 8: Kurzfristige Geldanlage</h2>
+            <p>Ein diakonischer Träger hat für ca. 3 Monate eine größere Summe zur Verfügung, die sicher angelegt werden soll. Welches Produkt würden Sie primär empfehlen?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Ein Tagesgeldkonto oder ein Festgeld mit kurzer Laufzeit (z.B. 3 Monate). Beides bietet hohe Sicherheit und eine planbare Verzinsung.</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <h2>Frage 9: Liquiditätsmanagement</h2>
+            <p>Warum ist eine genaue Liquiditätsplanung für Unternehmen, insbesondere in der Sozialwirtschaft, so entscheidend?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Um jederzeit die Zahlungsfähigkeit (z.B. für Gehälter, Mieten, Lieferanten) sicherzustellen und gleichzeitig überschüssige Mittel gewinnbringend anzulegen. Sie ist die Basis für finanzielle Stabilität.</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 10: Regulatorik</h2>
+            <p>Welche EU-Richtlinie hat den Zahlungsverkehrsmarkt für Drittanbieter (z.B. Fintechs) geöffnet und erfordert von Banken, den Zugriff auf Kontodaten über Schnittstellen zu ermöglichen, wenn der Kunde zustimmt?</p>
+            <ul class="options" data-correct="1">
+                <li onclick="selectOption(this)">MiFID II</li>
+                <li onclick="selectOption(this)">PSD2 (Payment Services Directive 2)</li>
+                <li onclick="selectOption(this)">DSGVO (Datenschutz-Grundverordnung)</li>
+            </ul>
+            <div class="answer">
+                <p><strong>Antwort:</strong> PSD2 (Payment Services Directive 2). Sie regelt Zahlungsdienste und -dienstleister im gesamten Europäischen Wirtschaftsraum (EWR).</p>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2>Frage 11: Datenaustausch</h2>
+            <p>Was ist der Hauptvorteil des "camt.053"-Formats gegenüber dem alten "MT940"-Format für die Übermittlung von Kontoauszugsinformationen?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> Das camt.053-Format (Bank to Customer Statement) ist XML-basiert und wesentlich strukturierter. Es kann viel mehr Detailinformationen zu Transaktionen (z.B. End-to-End-Referenzen) enthalten, was die automatische Verarbeitung in der Buchhaltung des Kunden erheblich erleichtert.</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <h2>Frage 12: Expertenwissen</h2>
+            <p>Wer ist der coolste Typ in der Bank?</p>
+            <div class="answer">
+                <p><strong>Antwort:</strong> der Peter ;-)</p>
+            </div>
+        </div>
+
+        <div id="end-screen">
+            <h2>Das Quiz ist beendet!</h2>
+            <p id="winner-text"></p>
+            <button onclick="restartQuiz()">Neues Spiel</button>
+        </div>
+
+        <div class="button-container">
+            <button class="show-answer-btn" onclick="showAnswer()" disabled>Antwort anzeigen</button>
+            <button id="next-question-btn" onclick="nextQuestion()">Nächste Frage</button>
+        </div>
+    </div>
+
+    <div id="scoreboard">
+        <div class="team" id="team1">
+            <h3>Team 1</h3>
+            <p class="score">0</p>
+            <button onclick="addPoint(0)">+1 Punkt</button>
+        </div>
+        <div class="team" id="team2">
+            <h3>Team 2</h3>
+            <p class="score">0</p>
+            <button onclick="addPoint(1)">+1 Punkt</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        const questions = document.querySelectorAll('.question-container');
+        const nextButton = document.getElementById('next-question-btn');
+        const showAnswerBtn = document.querySelector('.show-answer-btn');
+        const quizContainer = document.getElementById('quiz-container');
+        const endScreen = document.getElementById('end-screen');
+        const teamScores = [0, 0];
+        const scoreDisplays = document.querySelectorAll('.score');
+        
+        function setupQuestion(index) {
+            const currentQuestion = questions[index];
+            const options = currentQuestion.querySelectorAll('.options li');
+            showAnswerBtn.disabled = options.length > 0;
+            
+            if(options.length === 0){
+                showAnswerBtn.disabled = false;
+            }
+        }
+
+        function selectOption(option) {
+            showAnswerBtn.disabled = false;
+        }
+
+        function showAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            const answer = currentQuestion.querySelector('.answer');
+            answer.style.display = 'block';
+
+            const optionsList = currentQuestion.querySelector('.options');
+            if (optionsList) {
+                const correctIndex = parseInt(optionsList.dataset.correct);
+                const options = optionsList.querySelectorAll('li');
+                options.forEach((opt, idx) => {
+                    if (idx === correctIndex) {
+                        opt.classList.add('correct');
+                    } else {
+                        opt.classList.remove('correct'); 
+                    }
+                });
+            }
+        }
+
+        function nextQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            const answer = currentQuestion.querySelector('.answer');
+            answer.style.display = 'none';
+
+            const options = currentQuestion.querySelectorAll('.options li');
+            options.forEach(opt => opt.classList.remove('correct'));
+
+            questions[currentQuestionIndex].classList.remove('active');
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                questions[currentQuestionIndex].classList.add('active');
+                setupQuestion(currentQuestionIndex);
+            } else {
+                endQuiz();
+            }
+        }
+
+        function addPoint(teamIndex) {
+            teamScores[teamIndex]++;
+            scoreDisplays[teamIndex].textContent = teamScores[teamIndex];
+        }
+
+        function endQuiz() {
+            quizContainer.style.display = 'none';
+            endScreen.style.display = 'block';
+            
+            let winnerMessage = '';
+            if (teamScores[0] > teamScores[1]) {
+                winnerMessage = 'Team 1 hat gewonnen! Herzlichen Glückwunsch!';
+            } else if (teamScores[1] > teamScores[0]) {
+                winnerMessage = 'Team 2 hat gewonnen! Herzlichen Glückwunsch!';
+            } else {
+                winnerMessage = 'Es ist ein Unentschieden!';
+            }
+            document.getElementById('winner-text').textContent = winnerMessage;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            teamScores[0] = 0;
+            teamScores[1] = 0;
+            scoreDisplays[0].textContent = '0';
+            scoreDisplays[1].textContent = '0';
+
+            questions.forEach(q => q.classList.remove('active'));
+            questions[0].classList.add('active');
+            
+            setupQuestion(0);
+
+            quizContainer.style.display = 'block';
+            endScreen.style.display = 'none';
+        }
+        
+        setupQuestion(0);
+    </script>
+
+</body>
+</html>
