@@ -6,7 +6,7 @@ const html = `
   </div>
   <div class="progress-counter"><span class="progress-count">0</span> <span class="progress-label">Geschenke</span>
     <br>
-    <a href="ebnow">Weihnachtspächenaktion 2025</a>
+    <a href="https://ebnow.eb.de/content/news/article/690b7b848ab25b65b040ae66">Weihnachtspächenaktion 2025</a>
   </div>
 </div>
 `;
