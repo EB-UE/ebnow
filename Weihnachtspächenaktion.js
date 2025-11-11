@@ -54,8 +54,7 @@ const css = `
   }
 }
 `;
-const js = `
-var total = $("#currentPresents").data("aktuelle-anzahl-der-geschenke");
+const js = `var total = $("#currentPresents").data("aktuelle-anzahl-der-geschenke");
 
 var emojis = [
   {
@@ -160,17 +159,14 @@ var lit = $(".tree-circle.on").length;
 var i = lit;
 function myLoop() {
   var loop = setTimeout(function () {
-    if (i - 1 >= 0) {
-      $(".item")
-        .eq(i - 1)
-        .addClass("on");
-      $(".progress-count").text(i); // Update the progress counter
-    }
-    if (i == totalItems) {
+    transformed=Math.floor(i*120/300)-1
+      $(".item").eq(i).addClass("on");
+      $(".progress-count").text(transformed); // Update the progress counter
+    if (transformed == totalItems) {
       $(".star").addClass("on"); // Light star when goal is met
     }
     i++;
-    if (i <= total) {
+    if (transformed <= total) {
       myLoop(); // go to next circle
     }
   }, 1);
