@@ -144,9 +144,9 @@ for (i = 0; i < tree.length; i++) {
   }
   myLoop();`;
 
-document.addEventListener("DOMContentLoaded", (event) => {
- var slotmachine = document.querySelector('#Weihnachtspächenaktion-entry');
-slotmachine.innerHTML = html;
+// document.addEventListener("DOMContentLoaded", (event) => {
+ var Weihnachtspächenaktion = document.querySelector('#Weihnachtspächenaktion-entry');
+Weihnachtspächenaktion.innerHTML = html;
 
 var styleSheet = document.createElement("style");
 styleSheet.innerText = css;
@@ -156,4 +156,4 @@ var scripts = document.createElement("script");
 const newtext = document.createTextNode(js);
 scripts.appendChild(newtext);
 document.body.appendChild(scripts);
-});
+// });
