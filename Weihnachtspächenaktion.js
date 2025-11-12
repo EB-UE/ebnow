@@ -54,44 +54,127 @@ const css = `
   }
 }
 `;
-const js = `var total = $("#currentPresents").data("aktuelle-anzahl-der-geschenke");
+const js = `
+var total = $("#currentPresents").data("aktuelle-anzahl-der-geschenke");
 
 var emojis = [
-  {
+  
+    {  
+    emoji: "⭐",
+    postions: [
+      300
+   ],
+      scale:3
+  },   {  
+    emoji: "💜",
+    postions: [
+      233
+   ],
+      scale:1.5
+  },
+   {  
+    emoji: "🟡",
+    postions: [
+      16,
+      62,
+      95,
+      123,
+      128,
+      137,
+      210,
+      275,
+      293,
+   ],
+    scale:1.5
+  },
+  {  
+    emoji: "⚪",
+    postions: [
+      52,
+      159,
+      166,
+      218,
+      272,
+   ],
+    scale:1.5
+  },
+    {  
+    emoji: "😸",
+    postions: [
+      199
+   ],
+    scale:1.5
+  },
+   {  
+    emoji: "🔴",
+    postions: [
+      6,
+      42,
+      102,
+      190,
+      212,
+      257,
+      295
+   ],
+    scale:1.5
+  },
+  {  
     emoji: "🟣",
     postions: [
-      10,
-      20,
-      30,
-      40,
-      50,
-      60,
-      70,
-      80,
-      90,
-      100,
-      110,
-      120,
+      2,
       130,
-      140,
-      150,
-      160,
       170,
-      180,
-      190,
-      200,
-      210,
-      220,
-      230,
       240,
-      250,
-      260,
-      270,
-      280,
-      290
-    ],
-    scale: 3
-  }
+      284
+   ],
+    scale:1.5
+  },
+ {  
+    emoji: "🕯️",
+    postions: [
+      47,
+      71,
+      167,
+      185,
+      251,
+      263
+   ],
+    scale:1.5
+  },
+  // {
+  //   emoji: "#",
+  //   postions: [
+  //     10,
+  //     20,
+  //     30,
+  //     40,
+  //     50,
+  //     60,
+  //     70,
+  //     80,
+  //     90,
+  //     100,
+  //     110,
+  //     120,
+  //     130,
+  //     140,
+  //     150,
+  //     160,
+  //     170,
+  //     180,
+  //     190,
+  //     200,
+  //     210,
+  //     220,
+  //     230,
+  //     240,
+  //     250,
+  //     260,
+  //     270,
+  //     280,
+  //     290
+  //   ],
+  // }
 ];
 
 // Define the starting column and length of each row of dots
@@ -131,18 +214,18 @@ var markedItems = 0;
 for (i = 0; i < tree.length; i++) {
   column = tree[i].start - 1;
   for (j = 0; j < tree[i].length; j++) {
-    var item;
-    var foundEmoji = emojis.find((x) => x.postions.includes(markedItems));
-    item = $('<div class="item"></div>');
-
-    item.css("transform", "scale(" + (Math.random() * (1.2 - 0.8) + 0.8) + ")");
+    var item = $('<div class="item"></div>');
+    item.css("transform", "scale(" + (Math.random() * 0.4 + 0.8) + ")");
     item.css("left", column * 4 + "%");
     item.css("bottom", row + "%");
+
+    var foundEmoji = emojis.find((x) => x.postions.includes(markedItems));
     if (foundEmoji) {
+      // item.text(markedItems);
       item.text(foundEmoji.emoji);
-    } else if (markedItems === totalItems) {
-      item.text("⭐");
-      item.css("transform", "scale(3)");
+      if(foundEmoji.scale){
+        item.css("transform", "scale("+foundEmoji.scale+")");
+      }
     } else {
       item.text("🟢");
     }
@@ -154,25 +237,25 @@ for (i = 0; i < tree.length; i++) {
   }
   row += 4;
 }
-
+console.log(markedItems);
 var lit = $(".tree-circle.on").length;
 var i = lit;
 function myLoop() {
   var loop = setTimeout(function () {
-    transformed=Math.floor(i*120/300)-1
+    var transformed=Math.floor(i*120/301);
+    console.log(i, i*120/301, Math.floor(i*120/301), transformed);
       $(".item").eq(i).addClass("on");
       $(".progress-count").text(transformed); // Update the progress counter
     if (transformed == totalItems) {
       $(".star").addClass("on"); // Light star when goal is met
     }
     i++;
-    if (transformed <= total) {
+    if (transformed < total) {
       myLoop(); // go to next circle
     }
   }, 1);
 }
 myLoop(); // light first circle
-
 `;
 
 // document.addEventListener("DOMContentLoaded", (event) => {
