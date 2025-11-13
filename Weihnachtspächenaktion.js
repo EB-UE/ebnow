@@ -238,16 +238,16 @@ for (i = 0; i < tree.length; i++) {
   row += 4;
 }
 console.log(markedItems);
-var lit = $(".tree-circle.on").length;
+var lit = $(".Weihnachtspächenaktion .tree-circle.on").length;
 var i = lit;
 function myLoop() {
   var loop = setTimeout(function () {
     var transformed=Math.floor(i*120/301);
     console.log(i, i*120/301, Math.floor(i*120/301), transformed);
-      $(".item").eq(i).addClass("on");
-      $(".progress-count").text(transformed); // Update the progress counter
+      $(".Weihnachtspächenaktion .item").eq(i).addClass("on");
+      $(".Weihnachtspächenaktion .progress-count").text(transformed); // Update the progress counter
     if (transformed == totalItems) {
-      $(".star").addClass("on"); // Light star when goal is met
+      $(".Weihnachtspächenaktion .star").addClass("on"); // Light star when goal is met
     }
     i++;
     if (transformed < total) {
