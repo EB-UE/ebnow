@@ -267,7 +267,7 @@ styleSheet.innerText = css;
 document.head.appendChild(styleSheet);
 
 var scripts = document.createElement("script");
-const newtext = document.createTextNode(js);
+var newtext = document.createTextNode(js);
 scripts.appendChild(newtext);
 document.body.appendChild(scripts);
 // });
