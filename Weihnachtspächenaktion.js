@@ -1,18 +1,18 @@
 const html = `
-<div class="Weihnachtspächenaktion">
+<div class="Weihnachtspäckchenaktion">
   <div class="tree-container">
     <div class="tree-container-inner">
     </div>
   </div>
   <div class="progress-counter"><span class="progress-count">0</span> <span class="progress-label">Geschenke</span>
     <br>
-    <a href="https://ebnow.eb.de/content/news/article/690b7b848ab25b65b040ae66">Weihnachtspächenaktion 2025</a>
+    <a href="https://ebnow.eb.de/content/news/article/690b7b848ab25b65b040ae66">Weihnachtspäckchenaktion 2025</a>
   </div>
 </div>
 `;
 
 const css = `
-.Weihnachtspächenaktion {
+.Weihnachtspäckchenaktion {
   font-family: Roboto, sans-serif;
 
   .progress-counter {
@@ -238,16 +238,16 @@ for (i = 0; i < tree.length; i++) {
   row += 4;
 }
 console.log(markedItems);
-var lit = $(".Weihnachtspächenaktion .tree-circle.on").length;
+var lit = $(".Weihnachtspäckchenaktion .tree-circle.on").length;
 var i = lit;
 function myLoop() {
   var loop = setTimeout(function () {
     var transformed=Math.floor(i*120/301);
     console.log(i, i*120/301, Math.floor(i*120/301), transformed);
-      $(".Weihnachtspächenaktion .item").eq(i).addClass("on");
-      $(".Weihnachtspächenaktion .progress-count").text(transformed); // Update the progress counter
+      $(".Weihnachtspäckchenaktion .item").eq(i).addClass("on");
+      $(".Weihnachtspäckchenaktion .progress-count").text(transformed); // Update the progress counter
     if (transformed == totalItems) {
-      $(".Weihnachtspächenaktion .star").addClass("on"); // Light star when goal is met
+      $(".Weihnachtspäckchenaktion .star").addClass("on"); // Light star when goal is met
     }
     i++;
     if (transformed < total) {
@@ -259,8 +259,8 @@ myLoop(); // light first circle
 `;
 
 // document.addEventListener("DOMContentLoaded", (event) => {
- var Weihnachtspächenaktion = document.querySelector('#Weihnachtspächenaktion-entry');
-Weihnachtspächenaktion.innerHTML = html;
+ var Weihnachtspäckchenaktion = document.querySelector('#Weihnachtspäckchenaktion-entry');
+Weihnachtspäckchenaktion.innerHTML = html;
 
 var styleSheet = document.createElement("style");
 styleSheet.innerText = css;
