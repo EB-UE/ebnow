@@ -1,4 +1,4 @@
-const html = `
+var html = `
 <div class="Weihnachtspäckchenaktion">
   <div class="tree-container">
     <div class="tree-container-inner">
@@ -11,7 +11,7 @@ const html = `
 </div>
 `;
 
-const css = `
+var css = `
 .Weihnachtspäckchenaktion {
   font-family: Roboto, sans-serif;
 
@@ -54,7 +54,7 @@ const css = `
   }
 }
 `;
-const js = `
+var js = `
 var total = $("#currentPresents").data("aktuelle-anzahl-der-geschenke");
 
 var emojis = [
@@ -237,15 +237,15 @@ for (i = 0; i < tree.length; i++) {
   }
   row += 4;
 }
-console.log(markedItems);
+
 var lit = $(".Weihnachtspäckchenaktion .tree-circle.on").length;
 var i = lit;
 function myLoop() {
   var loop = setTimeout(function () {
     var transformed=Math.floor(i*120/301);
-    console.log(i, i*120/301, Math.floor(i*120/301), transformed);
-      $(".Weihnachtspäckchenaktion .item").eq(i).addClass("on");
-      $(".Weihnachtspäckchenaktion .progress-count").text(transformed); // Update the progress counter
+
+    $(".Weihnachtspäckchenaktion .item").eq(i).addClass("on");
+    $(".Weihnachtspäckchenaktion .progress-count").text(transformed); // Update the progress counter
     if (transformed == totalItems) {
       $(".Weihnachtspäckchenaktion .star").addClass("on"); // Light star when goal is met
     }
