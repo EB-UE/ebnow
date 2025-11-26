@@ -245,7 +245,7 @@ function myLoop() {
     var transformed=Math.floor(i*120/301);
 
     $(".Weihnachtspäckchenaktion .item").eq(i).addClass("on");
-    $(".Weihnachtspäckchenaktion .progress-count").text(transformed); // Update the progress counter
+    $(".Weihnachtspäckchenaktion .progress-count").text(transformed+ '/120'); // Update the progress counter
     if (transformed == totalItems) {
       $(".Weihnachtspäckchenaktion .star").addClass("on"); // Light star when goal is met
     }
