@@ -67,63 +67,76 @@ var html = `
 `;
 
 var css = `
-.hotdog-lunchlotterie #auto, .hotdog-lunchlotterie #progress {
-	 display: none;
+body {
+  font-family: system-ui, sans-serif;
+  background: #f6f6f6;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
 }
- .hotdog-lunchlotterie .wrap {
-	 background: #fff;
-	 border-radius: 14px;
-	 box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-	 padding: 16px;
-	 width: 820px;
+#auto,
+#progress {
+  display: none;
 }
- .hotdog-lunchlotterie svg {
-	 width: 100%;
-	 height: auto;
+.wrap {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  width: 820px;
 }
- .hotdog-lunchlotterie input[type="range"] {
-	 width: 100%;
-	 margin-top: 12px;
-	 accent-color: #b36a2e;
+svg {
+  width: 100%;
+  height: auto;
 }
- .hotdog-lunchlotterie button {
-	 border: none;
-	 background: #b36a2e;
-	 color: #fff;
-	 padding: 8px 12px;
-	 border-radius: 8px;
-	 cursor: pointer;
-	 margin-left: 8px;
+input[type="range"] {
+  width: 100%;
+  margin-top: 12px;
+  accent-color: #b36a2e;
 }
- .hotdog-lunchlotterie button.secondary {
-	 background: #666;
+button {
+  border: none;
+  background: #b36a2e;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 8px;
 }
- .hotdog-lunchlotterie .crumb {
-	 fill: #f1d3a2;
-	 stroke: #ddb47a;
-	 stroke-width: 0.6;
-	 opacity: 0.98;
-	 transform-box: fill-box;
-	 transform-origin: center;
-	 animation: crumbFall var(--dur, 900ms) cubic-bezier(0.21, 0.9, 0.31, 1) forwards;
+button.secondary {
+  background: #666;
 }
- @keyframes crumbFall {
-	 to {
-		 transform: translate(var(--dx, 60px), var(--dy, 140px)) rotate(var(--rot, 20deg));
-		 opacity: 0;
-	}
+.crumb {
+  fill: #f1d3a2;
+  stroke: #ddb47a;
+  stroke-width: 0.6;
+  opacity: 0.98;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: crumbFall var(--dur, 900ms) cubic-bezier(0.21, 0.9, 0.31, 1)
+    forwards;
 }
- .hotdog-lunchlotterie .ground-crumb {
-	 fill: #e8c590;
-	 stroke: #d2aa6e;
-	 stroke-width: 0.6;
-	 opacity: 0.95;
+@keyframes crumbFall {
+  to {
+    transform: translate(var(--dx, 60px), var(--dy, 140px))
+      rotate(var(--rot, 20deg));
+    opacity: 0;
+  }
 }
- .hotdog-lunchlotterie .pct {
-	 font: 600 11.6666666667px system-ui, Segoe UI, Roboto, Arial, sans-serif;
-	 fill: #5c3a19;
-	 opacity: 0.9;
+.ground-crumb {
+  fill: #e8c590;
+  stroke: #d2aa6e;
+  stroke-width: 0.6;
+  opacity: 0.95;
 }
+.pct {
+  font: 600 28px system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  fill: #5c3a19;
+  opacity: 0.9;
+}
+
   `;
 
 var js = `
@@ -282,7 +295,33 @@ function accumulateGroundCrumbs(p, edgeX) {
 
   update(0); 
 
-  tick();
+
+const el = document.getElementById("triggers-eating-when-visible");
+
+// Wird aufgerufen, wenn sich die Schnittmenge ändert
+const observer = new IntersectionObserver(
+  (entries, obs) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        console.log("Target ist im Viewport!");
+        // -> Hier deine Methode aufrufen:
+        tick();
+        // Falls nur einmal ausführen:
+        obs.unobserve(entry.target);
+      } else {
+        console.log("Target hat den Viewport wieder verlassen.");
+      }
+    }
+  },
+  {
+    root: null, // null = Viewport
+    rootMargin: "0px", // z. B. '100px 0px' um früher zu triggern
+    threshold: 0.1 // ab 10% Sichtbarkeit
+  }
+);
+
+observer.observe(el);
+
  
 `;
 
