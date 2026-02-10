@@ -314,8 +314,8 @@ observer.observe(el);
  
 `;
 
-// document.addEventListener("DOMContentLoaded", (event) => {
- var hotdog_lunchlotterie = document.querySelector('#hotdog-lunchlotterie-entry');
+document.addEventListener("DOMContentLoaded", (event) => {
+var hotdog_lunchlotterie = document.querySelector('#hotdog-lunchlotterie-entry');
 hotdog_lunchlotterie.innerHTML = html;
 
 var styleSheet = document.createElement("style");
@@ -326,4 +326,4 @@ var scripts = document.createElement("script");
 var newtext = document.createTextNode(js);
 scripts.appendChild(newtext);
 document.body.appendChild(scripts);
-// });
+ });
