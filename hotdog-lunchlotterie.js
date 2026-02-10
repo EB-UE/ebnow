@@ -63,6 +63,8 @@ var html = `
     <input id="progress" type="range" min="0" max="100" value="0" />
     <button id="auto">Play</button>
   </div>
+  <div id="triggers-eating-when-visible"></div>
+
 </div>
 `;
 
