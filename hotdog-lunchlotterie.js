@@ -314,10 +314,6 @@ observer.observe(el);
  
 `;
 
-document.addEventListener("DOMContentLoaded", (event) => {console.log("DOMContentLoaded");});
-window.addEventListener('load', () => {console.log("load");});
-
-
 
 var hotdog_lunchlotterie = document.querySelector('#hotdog-lunchlotterie-entry');
 hotdog_lunchlotterie.innerHTML = html;
@@ -325,13 +321,7 @@ hotdog_lunchlotterie.innerHTML = html;
 var styleSheet = document.createElement("style");
 styleSheet.innerText = css;
 document.head.appendChild(styleSheet);
-window.addEventListener('load', () => {
-	var scripts = document.createElement("script");
-	var newtext = document.createTextNode(js);
-	scripts.appendChild(newtext);
-	document.body.appendChild(scripts);
-}
-	, { once: true }
-);
-
-// });
+var scripts = document.createElement("script");
+var newtext = document.createTextNode(js);
+scripts.appendChild(newtext);
+document.body.appendChild(scripts);
