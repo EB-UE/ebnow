@@ -1,6 +1,5 @@
 var html = `
 <div class="hotdog-lunchlotterie">
-  <config id="config" data-start-datum="01.02.2026" data-ende-datum="20.02.2026" data-test-datum="10.02.2026"/> 
   <h2>Verbleibende Zeit bis zur Auslosung der Lunch Lotterie </h2>
    <svg id="hotdogSVG" viewBox="0 0 800 280">
     <defs>
