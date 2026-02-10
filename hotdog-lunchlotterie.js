@@ -121,7 +121,7 @@ var css = `
 	 opacity: 0.95;
 }
  .hotdog-lunchlotterie .pct {
-	 font: 600 11.6666666667px system-ui, Segoe UI, Roboto, Arial, sans-serif;
+	 font: 600 24px system-ui, Segoe UI, Roboto, Arial, sans-serif;
 	 fill: #5c3a19;
 	 opacity: 0.9;
 }
@@ -314,7 +314,11 @@ observer.observe(el);
  
 `;
 
-// document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {console.log("DOMContentLoaded");});
+window.addEventListener('load', () => {console.log("load");});
+
+
+
 var hotdog_lunchlotterie = document.querySelector('#hotdog-lunchlotterie-entry');
 hotdog_lunchlotterie.innerHTML = html;
 
