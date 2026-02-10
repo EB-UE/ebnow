@@ -166,7 +166,7 @@ const startDatum = parseGermanDate(startDatumString);
 const endeDatum = parseGermanDate(endeDatumString);
 
 const totaleDifferenz = datediff(startDatum, endeDatum);
-const aktuelleDifferenz = datediff(startDatum, new Date(2026, 1, 17));
+const aktuelleDifferenz = datediff(startDatum, new Date());
 const tageÜbrig = totaleDifferenz - aktuelleDifferenz;
 
 console.log(tageÜbrig + "tage");
