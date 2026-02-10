@@ -297,31 +297,31 @@ function accumulateGroundCrumbs(p, edgeX) {
   update(0); 
 
 
-//const el = document.getElementById("triggers-eating-when-visible");
+const el = document.getElementById("triggers-eating-when-visible");
 
 // Wird aufgerufen, wenn sich die Schnittmenge ändert
-//const observer = new IntersectionObserver(
-//  (entries, obs) => {
-//    for (const entry of entries) {
-//      if (entry.isIntersecting) {
-//        console.log("Target ist im Viewport!");
-//        // -> Hier deine Methode aufrufen:
+const observer = new IntersectionObserver(
+  (entries, obs) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        console.log("Target ist im Viewport!");
+        // -> Hier deine Methode aufrufen:
         tick();
-//        // Falls nur einmal ausführen:
-//        obs.unobserve(entry.target);
-//      } else {
-//        console.log("Target hat den Viewport wieder verlassen.");
-//      }
-//    }
-//  },
-//  {
-//    root: null, // null = Viewport
-//    rootMargin: "0px", // z. B. '100px 0px' um früher zu triggern
-//    threshold: 0.1 // ab 10% Sichtbarkeit
-//  }
-//);
-//
-//observer.observe(el);
+        // Falls nur einmal ausführen:
+        obs.unobserve(entry.target);
+      } else {
+        console.log("Target hat den Viewport wieder verlassen.");
+      }
+    }
+  },
+  {
+    root: null, // null = Viewport
+    rootMargin: "0px", // z. B. '100px 0px' um früher zu triggern
+    threshold: 0.1 // ab 10% Sichtbarkeit
+  }
+);
+
+observer.observe(el);
 
  
 `;
@@ -337,5 +337,5 @@ document.head.appendChild(styleSheet);
 var scripts = document.createElement("script");
 var newtext = document.createTextNode(js);
 scripts.appendChild(newtext);
-document.body.appendChild(scripts);
+//document.body.appendChild(scripts);
 // });
