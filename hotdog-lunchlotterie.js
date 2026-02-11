@@ -55,7 +55,7 @@ var html = `
     <g id="groundCrumbs"></g>
 
     <!-- Prozentanzeige -->
-    <text id="pctLabel" class="pct" x="86" y="64">0 % gegessen</text>
+    <text id="pctLabel" class="pct" x="86" y="64"></text>
   </svg>
   
   <a id="lunchlotterieBeitragLink" target="_blank" href="">
