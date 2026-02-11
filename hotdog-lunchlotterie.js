@@ -57,6 +57,10 @@ var html = `
     <!-- Prozentanzeige -->
     <text id="pctLabel" class="pct" x="86" y="64">0 % gegessen</text>
   </svg>
+  
+  <a id="lunchlotterieBeitragLink" target="_blank" href="">
+   Zum EBnow Beitrag
+</a>
 
   <div style="margin-top:10px;">
     <input id="progress" type="range" min="0" max="100" value="0" />
@@ -87,7 +91,7 @@ var css = `
 	 margin-top: 12px;
 	 accent-color: #b36a2e;
 }
- .hotdog-lunchlotterie button {
+ .hotdog-lunchlotterie a {
 	 border: none;
 	 background: #b36a2e;
 	 color: #fff;
@@ -95,9 +99,7 @@ var css = `
 	 border-radius: 8px;
 	 cursor: pointer;
 	 margin-left: 8px;
-}
- .hotdog-lunchlotterie button.secondary {
-	 background: #666;
+	 text-decoration: none;
 }
  .hotdog-lunchlotterie .crumb {
 	 fill: #f1d3a2;
@@ -129,17 +131,12 @@ var css = `
   `;
 
 var js = `
-
-
-
-
-
-
-  const config = document.querySelector("#config");
+const config = document.querySelector("#config");
 
 const startDatumString = config.dataset.startDatum;
 const endeDatumString = config.dataset.endeDatum;
 const testDatumString = config.dataset.testDatum;
+const ebnowBeitragLink = config.dataset.beitragLink;
 
 function parseGermanDate(datumAlsString) {
   const [day, month, year] = datumAlsString.split(".").map(Number);
@@ -160,6 +157,8 @@ const tageÜbrig = (totaleDifferenz - aktuelleDifferenz) + 1;
 console.log(tageÜbrig + "tage");
 
 const fortschritt = (aktuelleDifferenz / totaleDifferenz) * 100;
+
+document.getElementById("lunchlotterieBeitragLink").href = ebnowBeitragLink
 
 // alter Shit
 
@@ -282,7 +281,7 @@ function accumulateGroundCrumbs(p, edgeX) {
     else { autoplay=false; btnAuto.textContent='Play';}
   }
 
-  update(0); 
+  update(0);
 
 
 const el = document.getElementById("triggers-eating-when-visible");
