@@ -131,12 +131,12 @@ var css = `
   `;
 
 var js = `
-const config = document.querySelector("#config");
+var config = document.querySelector("#config");
 
-const startDatumString = config.dataset.startDatum;
-const endeDatumString = config.dataset.endeDatum;
-const testDatumString = config.dataset.testDatum;
-const ebnowBeitragLink = config.dataset.beitragLink;
+var startDatumString = config.dataset.startDatum;
+var endeDatumString = config.dataset.endeDatum;
+var testDatumString = config.dataset.testDatum;
+var ebnowBeitragLink = config.dataset.beitragLink;
 
 function parseGermanDate(datumAlsString) {
   const [day, month, year] = datumAlsString.split(".").map(Number);
@@ -147,39 +147,39 @@ function datediff(first, second) {
   return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
 
-const startDatum = parseGermanDate(startDatumString);
-const endeDatum = parseGermanDate(endeDatumString);
+var startDatum = parseGermanDate(startDatumString);
+var endeDatum = parseGermanDate(endeDatumString);
 
-const totaleDifferenz = datediff(startDatum, endeDatum);
-const aktuelleDifferenz = datediff(startDatum, new Date());
-const tageÜbrig = (totaleDifferenz - aktuelleDifferenz) + 1;
+var totaleDifferenz = datediff(startDatum, endeDatum);
+var aktuelleDifferenz = datediff(startDatum, new Date());
+var tageÜbrig = (totaleDifferenz - aktuelleDifferenz) + 1;
 
 console.log(tageÜbrig + "tage");
 
-const fortschritt = (aktuelleDifferenz / totaleDifferenz) * 100;
+var fortschritt = (aktuelleDifferenz / totaleDifferenz) * 100;
 
 document.getElementById("lunchlotterieBeitragLink").href = ebnowBeitragLink
 
 // alter Shit
 
-const remainRect = document.getElementById("remainRect");
-const biteG = document.getElementById("biteG");
-const crumbsLayer = document.getElementById("crumbs");
-const groundLayer = document.getElementById("groundCrumbs");
-const pctLabel = document.getElementById("pctLabel");
-const slider = document.getElementById("progress");
-const btnAuto = document.getElementById("auto");
-const btnReset = document.getElementById("reset");
+var remainRect = document.getElementById("remainRect");
+var biteG = document.getElementById("biteG");
+var crumbsLayer = document.getElementById("crumbs");
+var groundLayer = document.getElementById("groundCrumbs");
+var pctLabel = document.getElementById("pctLabel");
+var slider = document.getElementById("progress");
+var btnAuto = document.getElementById("auto");
+var btnReset = document.getElementById("reset");
 
-const LEFT_X = 80;
-const WIDTH = 560;
-const MID_Y = 140;
-const FLOOR_Y = 210;
+var LEFT_X = 80;
+var WIDTH = 560;
+var MID_Y = 140;
+var FLOOR_Y = 210;
 
-const Y_OFFSETS = [-30, -18, -6, 6, 18, 30];
-const BASE_R = [20, 18, 16, 16, 18, 20];
+var Y_OFFSETS = [-30, -18, -6, 6, 18, 30];
+var BASE_R = [20, 18, 16, 16, 18, 20];
 
-const biteCircles = Y_OFFSETS.map(() => {
+var biteCircles = Y_OFFSETS.map(() => {
   const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   c.setAttribute("r", 0);
   biteG.appendChild(c);
@@ -284,10 +284,10 @@ function accumulateGroundCrumbs(p, edgeX) {
   update(0);
 
 
-const el = document.getElementById("triggers-eating-when-visible");
+var el = document.getElementById("triggers-eating-when-visible");
 
 // Wird aufgerufen, wenn sich die Schnittmenge ändert
-const observer = new IntersectionObserver(
+var observer = new IntersectionObserver(
   (entries, obs) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
