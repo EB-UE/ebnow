@@ -186,10 +186,10 @@ var biteCircles = Y_OFFSETS.map(() => {
   return c;
 });
 
-let lastProgress = 0;
-let autoplay = true;
-let rafId = null;
-let groundCrumbsCount = 0;
+var lastProgress = 0;
+var autoplay = true;
+var rafId = null;
+var groundCrumbsCount = 0;
 const MAX_GROUND_CRUMBS = 8 ;
 
 function update(progress) {
