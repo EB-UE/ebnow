@@ -139,7 +139,7 @@ var testDatumString = config.dataset.testDatum;
 var ebnowBeitragLink = config.dataset.beitragLink;
 
 function parseGermanDate(datumAlsString) {
-  const [day, month, year] = datumAlsString.split(".").map(Number);
+  var [day, month, year] = datumAlsString.split(".").map(Number);
   return new Date(year, month - 1, day);
 }
 
@@ -180,7 +180,7 @@ var Y_OFFSETS = [-30, -18, -6, 6, 18, 30];
 var BASE_R = [20, 18, 16, 16, 18, 20];
 
 var biteCircles = Y_OFFSETS.map(() => {
-  const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   c.setAttribute("r", 0);
   biteG.appendChild(c);
   return c;
@@ -190,21 +190,21 @@ var lastProgress = 0;
 var autoplay = true;
 var rafId = null;
 var groundCrumbsCount = 0;
-const MAX_GROUND_CRUMBS = 8 ;
+var MAX_GROUND_CRUMBS = 8 ;
 
 function update(progress) {
-  const p = Math.max(0, Math.min(100, progress)) / 100;
-  const remainingW = WIDTH * (1 - p);
-  const rightX = LEFT_X + remainingW;
+  var p = Math.max(0, Math.min(100, progress)) / 100;
+  var remainingW = WIDTH * (1 - p);
+  var rightX = LEFT_X + remainingW;
 
   remainRect.setAttribute("width", remainingW);
   pctLabel.textContent = \`\$\{tageÜbrig\} Tage übrig\`;
 
-  const depthScale = 0.7 + 0.5 * p;
+  var depthScale = 0.7 + 0.5 * p;
   biteCircles.forEach((c, i) => {
-    const cx = rightX - BASE_R[i] * 0.3;
-    const cy = MID_Y + Y_OFFSETS[i];
-    const r = BASE_R[i] * depthScale;
+    var cx = rightX - BASE_R[i] * 0.3;
+    var cy = MID_Y + Y_OFFSETS[i];
+    var r = BASE_R[i] * depthScale;
     c.setAttribute("cx", cx);
     c.setAttribute("cy", cy);
     c.setAttribute("r", p === 0 ? 0 : r);
@@ -216,17 +216,17 @@ function update(progress) {
 }
 
 function spawnFallingCrumbs(edgeX) {
-  const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  const y = MID_Y + (Math.random() * 20 - 10);
-  const r = 1.8 + Math.random() * 2.6;
+  var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  var y = MID_Y + (Math.random() * 20 - 10);
+  var r = 1.8 + Math.random() * 2.6;
   c.setAttribute("cx", edgeX - (6 + Math.random() * 12));
   c.setAttribute("cy", y);
   c.setAttribute("r", r);
   c.setAttribute("class", "crumb");
-  const dx = 40 + Math.random() * 120;
-  const dy = 70 + Math.random() * 170;
-  const rot = Math.random() * 160 - 80 + "deg";
-  const dur = 700 + Math.random() * 1000 + "ms";
+  var dx = 40 + Math.random() * 120;
+  var dy = 70 + Math.random() * 170;
+  var rot = Math.random() * 160 - 80 + "deg";
+  var dur = 700 + Math.random() * 1000 + "ms";
   c.style.setProperty("--dx", dx + "px");
   c.style.setProperty("--dy", dy + "px");
   c.style.setProperty("--rot", rot);
@@ -236,14 +236,14 @@ function spawnFallingCrumbs(edgeX) {
 }
 
 function accumulateGroundCrumbs(p, edgeX) {
-  const targetCount = Math.round(p * MAX_GROUND_CRUMBS);
-  const toAdd = targetCount - groundCrumbsCount;
+  var targetCount = Math.round(p * MAX_GROUND_CRUMBS);
+  var toAdd = targetCount - groundCrumbsCount;
   if (toAdd <= 0) return;
-  for (let i = 0; i < toAdd; i++) {
-    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    const x = edgeX - 40 + Math.random() * 160;
-    const y = FLOOR_Y + 6 + Math.random() * 10;
-    const r = 1.3 + Math.random() * 2.3;
+  for (var i = 0; i < toAdd; i++) {
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    var x = edgeX - 40 + Math.random() * 160;
+    var y = FLOOR_Y + 6 + Math.random() * 10;
+    var r = 1.3 + Math.random() * 2.3;
     c.setAttribute("cx", x);
     c.setAttribute("cy", y);
     c.setAttribute("r", r);
@@ -273,8 +273,8 @@ function accumulateGroundCrumbs(p, edgeX) {
   // });
 
   function tick(){
-    const v=parseFloat(slider.value);
-    const next=v+0.6;
+    var v=parseFloat(slider.value);
+    var next=v+0.6;
     slider.value=next>=100?100:next;
     update(parseFloat(slider.value));
     if(autoplay && next<100 && next<=fortschritt) rafId=requestAnimationFrame(tick);
@@ -289,7 +289,7 @@ var el = document.getElementById("triggers-eating-when-visible");
 // Wird aufgerufen, wenn sich die Schnittmenge ändert
 var observer = new IntersectionObserver(
   (entries, obs) => {
-    for (const entry of entries) {
+    for (var entry of entries) {
       if (entry.isIntersecting) {
         console.log("Target ist im Viewport!");
         // -> Hier deine Methode aufrufen:
