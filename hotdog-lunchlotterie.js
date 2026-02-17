@@ -133,18 +133,21 @@ var css = `
 var js = `
 var config = document.querySelector("#config");
 
+var hotdogWidget = hotdog_lunchlotterie;
+
 var startDatumString = config.dataset.startDatum;
 var endeDatumString = config.dataset.endeDatum;
 var testDatumString = config.dataset.testDatum;
 var ebnowBeitragLink = config.dataset.beitragLink;
+var hotdogAnzeigenData = config.dataset.hotdogAnzeigen;
 
 function parseGermanDate(datumAlsString) {
-  var [day, month, year] = datumAlsString.split(".").map(Number);
-  return new Date(year, month - 1, day);
+    var [day, month, year] = datumAlsString.split(".").map(Number);
+    return new Date(year, month - 1, day);
 }
 
 function datediff(first, second) {
-  return Math.round((second - first) / (1000 * 60 * 60 * 24));
+    return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
 
 var startDatum = parseGermanDate(startDatumString);
@@ -180,137 +183,146 @@ var Y_OFFSETS = [-30, -18, -6, 6, 18, 30];
 var BASE_R = [20, 18, 16, 16, 18, 20];
 
 var biteCircles = Y_OFFSETS.map(() => {
-  var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  c.setAttribute("r", 0);
-  biteG.appendChild(c);
-  return c;
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("r", 0);
+    biteG.appendChild(c);
+    return c;
 });
 
 var lastProgress = 0;
 var autoplay = true;
 var rafId = null;
 var groundCrumbsCount = 0;
-var MAX_GROUND_CRUMBS = 8 ;
+var MAX_GROUND_CRUMBS = 8;
 
 function update(progress) {
-  var p = Math.max(0, Math.min(100, progress)) / 100;
-  var remainingW = WIDTH * (1 - p);
-  var rightX = LEFT_X + remainingW;
+    var p = Math.max(0, Math.min(100, progress)) / 100;
+    var remainingW = WIDTH * (1 - p);
+    var rightX = LEFT_X + remainingW;
 
-  remainRect.setAttribute("width", remainingW);
-  pctLabel.textContent = \`\$\{tageÜbrig\} Tage übrig\`;
+    remainRect.setAttribute("width", remainingW);
+    pctLabel.textContent = \`\$\{tageÜbrig\} Tage übrig\`;
 
-  var depthScale = 0.7 + 0.5 * p;
-  biteCircles.forEach((c, i) => {
-    var cx = rightX - BASE_R[i] * 0.3;
-    var cy = MID_Y + Y_OFFSETS[i];
-    var r = BASE_R[i] * depthScale;
-    c.setAttribute("cx", cx);
-    c.setAttribute("cy", cy);
-    c.setAttribute("r", p === 0 ? 0 : r);
-  });
+    var depthScale = 0.7 + 0.5 * p;
+    biteCircles.forEach((c, i) => {
+        var cx = rightX - BASE_R[i] * 0.3;
+        var cy = MID_Y + Y_OFFSETS[i];
+        var r = BASE_R[i] * depthScale;
+        c.setAttribute("cx", cx);
+        c.setAttribute("cy", cy);
+        c.setAttribute("r", p === 0 ? 0 : r);
+    });
 
-  if (progress > lastProgress) spawnFallingCrumbs(rightX);
-  accumulateGroundCrumbs(p, rightX);
-  lastProgress = progress;
+    if (progress > lastProgress) spawnFallingCrumbs(rightX);
+    accumulateGroundCrumbs(p, rightX);
+    lastProgress = progress;
 }
 
 function spawnFallingCrumbs(edgeX) {
-  var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  var y = MID_Y + (Math.random() * 20 - 10);
-  var r = 1.8 + Math.random() * 2.6;
-  c.setAttribute("cx", edgeX - (6 + Math.random() * 12));
-  c.setAttribute("cy", y);
-  c.setAttribute("r", r);
-  c.setAttribute("class", "crumb");
-  var dx = 40 + Math.random() * 120;
-  var dy = 70 + Math.random() * 170;
-  var rot = Math.random() * 160 - 80 + "deg";
-  var dur = 700 + Math.random() * 1000 + "ms";
-  c.style.setProperty("--dx", dx + "px");
-  c.style.setProperty("--dy", dy + "px");
-  c.style.setProperty("--rot", rot);
-  c.style.setProperty("--dur", dur);
-  c.addEventListener("animationend", () => c.remove());
-  crumbsLayer.appendChild(c);
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    var y = MID_Y + (Math.random() * 20 - 10);
+    var r = 1.8 + Math.random() * 2.6;
+    c.setAttribute("cx", edgeX - (6 + Math.random() * 12));
+    c.setAttribute("cy", y);
+    c.setAttribute("r", r);
+    c.setAttribute("class", "crumb");
+    var dx = 40 + Math.random() * 120;
+    var dy = 70 + Math.random() * 170;
+    var rot = Math.random() * 160 - 80 + "deg";
+    var dur = 700 + Math.random() * 1000 + "ms";
+    c.style.setProperty("--dx", dx + "px");
+    c.style.setProperty("--dy", dy + "px");
+    c.style.setProperty("--rot", rot);
+    c.style.setProperty("--dur", dur);
+    c.addEventListener("animationend", () => c.remove());
+    crumbsLayer.appendChild(c);
 }
 
 function accumulateGroundCrumbs(p, edgeX) {
-  var targetCount = Math.round(p * MAX_GROUND_CRUMBS);
-  var toAdd = targetCount - groundCrumbsCount;
-  if (toAdd <= 0) return;
-  for (var i = 0; i < toAdd; i++) {
-    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    var x = edgeX - 40 + Math.random() * 160;
-    var y = FLOOR_Y + 6 + Math.random() * 10;
-    var r = 1.3 + Math.random() * 2.3;
-    c.setAttribute("cx", x);
-    c.setAttribute("cy", y);
-    c.setAttribute("r", r);
-    c.setAttribute("class", "ground-crumb");
-    groundLayer.appendChild(c);
-    groundCrumbsCount++;
-  }
+    var targetCount = Math.round(p * MAX_GROUND_CRUMBS);
+    var toAdd = targetCount - groundCrumbsCount;
+    if (toAdd <= 0) return;
+    for (var i = 0; i < toAdd; i++) {
+        var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        var x = edgeX - 40 + Math.random() * 160;
+        var y = FLOOR_Y + 6 + Math.random() * 10;
+        var r = 1.3 + Math.random() * 2.3;
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", r);
+        c.setAttribute("class", "ground-crumb");
+        groundLayer.appendChild(c);
+        groundCrumbsCount++;
+    }
 }
 
-  slider.addEventListener('input', e=>{
-    if (autoplay){ autoplay=false; btnAuto.textContent='Play'; if(rafId) cancelAnimationFrame(rafId);}
+slider.addEventListener('input', e => {
+    if (autoplay) { autoplay = false; btnAuto.textContent = 'Play'; if (rafId) cancelAnimationFrame(rafId); }
     update(parseFloat(e.target.value));
-  });
+});
 
-  btnAuto.addEventListener('click', ()=>{
-    autoplay=!autoplay;
-    btnAuto.textContent=autoplay?'Pause':'Play';
-    if(autoplay) tick(); else if(rafId) cancelAnimationFrame(rafId);
-  });
-
-  // btnReset.addEventListener('click', ()=>{
-  //   autoplay=false; btnAuto.textContent='Play';
-  //   if(rafId) cancelAnimationFrame(rafId);
-  //   slider.value=0; lastProgress=0;
-  //   groundLayer.innerHTML=''; groundCrumbsCount=0;
-  //   update(0);
-  // });
-
-  function tick(){
-    var v=parseFloat(slider.value);
-    var next=v+0.6;
-    slider.value=next>=100?100:next;
+function tick() {
+    var v = parseFloat(slider.value);
+    var next = v + 0.6;
+    slider.value = next >= 100 ? 100 : next;
     update(parseFloat(slider.value));
-    if(autoplay && next<100 && next<=fortschritt) rafId=requestAnimationFrame(tick);
-    else { autoplay=false; btnAuto.textContent='Play';}
-  }
+    if (autoplay && next < 100 && next <= fortschritt) rafId = requestAnimationFrame(tick);
+    else { autoplay = false; btnAuto.textContent = 'Play'; }
+}
 
-  update(0);
+update(0);
 
 
 var el = document.getElementById("triggers-eating-when-visible");
 
 // Wird aufgerufen, wenn sich die Schnittmenge ändert
 var observer = new IntersectionObserver(
-  (entries, obs) => {
-    for (var entry of entries) {
-      if (entry.isIntersecting) {
-        console.log("Target ist im Viewport!");
-        // -> Hier deine Methode aufrufen:
-        tick();
-        // Falls nur einmal ausführen:
-        obs.unobserve(entry.target);
-      } else {
-        console.log("Target hat den Viewport wieder verlassen.");
-      }
+    (entries, obs) => {
+        for (var entry of entries) {
+            if (entry.isIntersecting) {
+                // -> Hier deine Methode aufrufen:
+                tick();
+                // Falls nur einmal ausführen:
+                obs.unobserve(entry.target);
+            }
+        }
+    },
+    {
+        root: null, // null = Viewport
+        rootMargin: "0px", // z. B. '100px 0px' um früher zu triggern
+        threshold: 0.1 // ab 10% Sichtbarkeit
     }
-  },
-  {
-    root: null, // null = Viewport
-    rootMargin: "0px", // z. B. '100px 0px' um früher zu triggern
-    threshold: 0.1 // ab 10% Sichtbarkeit
-  }
 );
 
 observer.observe(el);
 
- 
+function parentElementAusblenden(element) {
+
+    let el = element;
+
+    // Nach oben traversieren, bis wir den passenden Wrapper finden
+    while (el && el.tagName !== "STATIC-CONTENT-BLOCK") {
+        el = el.parentElement;
+    }
+
+    // Wenn gefunden: komplett ausblenden
+    if (el) {
+        el.style.display = "none";
+    }
+}
+
+function hotdogEinOderAusblenden(dataEinblenden, widget) {
+
+    let einblenden = dataEinblenden === "true";
+
+    if (einblenden) {
+        widget.style.display = "block";
+    } else {
+        parentElementAusblenden(widget)
+    }
+}
+
+hotdogEinOderAusblenden(hotdogAnzeigenData, hotdogWidget)
 `;
 
 
