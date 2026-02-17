@@ -1,5 +1,5 @@
 var html = `
-<div class="hotdog-lunchlotterie" style="display:none">
+<div id="hotdog_widget" class="hotdog-lunchlotterie" style="display:none">
   <h2>Verbleibende Zeit bis zur Auslosung der Lunch Lotterie </h2>
    <svg id="hotdogSVG" viewBox="0 0 800 280">
     <defs>
@@ -133,7 +133,7 @@ var css = `
 var js = `
 var config = document.querySelector("#config");
 
-var hotdogWidget = hotdog_lunchlotterie;
+var hotdogWidget = document.getElementById("hotdog_widget");
 
 var startDatumString = config.dataset.startDatum;
 var endeDatumString = config.dataset.endeDatum;
