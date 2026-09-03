@@ -35,8 +35,7 @@ export interface UserProfile {
 
 export const BirthdayEntry = ({ date, users }: BirthdayEntryProps): ReactElement => {
 
-  const birthdayUserAtDate = users.filter(user => user.enabled)
-    .filter(user => user.status == 'activated')
+  const birthdayUserAtDate = users.filter(user => user.status == 'activated')
     .filter(user => user.profile)
     .filter(user => user.profile.geburtsdatum)
     .filter(user => {
