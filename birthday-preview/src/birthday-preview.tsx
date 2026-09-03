@@ -21,7 +21,36 @@ export interface BirthdayPreviewProps extends BlockAttributes {
   message: string;
 }
 
-export const BirthdayPreview = ({ message, contentLanguage }: BirthdayPreviewProps): ReactElement => {
-  return <div>Hello {message} {contentLanguage}</div>;
+export const BirthdayPreview = async ({ message }: BirthdayPreviewProps): Promise<ReactElement> => {
+
+
+  const oneUserToGetTotalCount = await we.api.getUsers({
+    limit: 1
+  });
+  const allUsers = await we.api.getUsers({
+    limit: oneUserToGetTotalCount.total
+  });
+
+  const relevantUsers = allUsers.data
+    .filter(user => user.status == 'activated')
+    .filter(user => user.profile?.geburtsdatum)
+    .filter(user => {
+      const birtdayString = user.profile.geburtsdatum
+      const dmy = birtdayString.split(".");
+      const birthday = new Date(dmy[2], dmy[1] - 1, dmy[0]);
+      const today = new Date();
+      return today.getDate() === birthday.getDate() && today.getMonth() === birthday.getMonth();
+    });
+
+  const userLinks = relevantUsers.map(user => {
+    const href = `/profile/${user.id}`
+    return <a href={href}> {user.firstName}  {user.lastName} 🎉 </a >
+  });
+
+
+
+
+
+  return <div>{userLinks}</div>;
 };
 
