@@ -11,46 +11,126 @@
  * limitations under the License.
  */
 
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { BlockAttributes } from "widget-sdk";
 
-/**
- * React Component
- */
 export interface BirthdayPreviewProps extends BlockAttributes {
   message: string;
 }
 
-export const BirthdayPreview = async ({ message }: BirthdayPreviewProps): Promise<ReactElement> => {
+interface BirthdayUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
 
+export const BirthdayPreview = ({
+  message,
+}: BirthdayPreviewProps): ReactElement => {
+  const [users, setUsers] = useState<BirthdayUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const oneUserToGetTotalCount = await we.api.getUsers({
-    limit: 1
-  });
-  const allUsers = await we.api.getUsers({
-    limit: oneUserToGetTotalCount.total
-  });
+  useEffect(() => {
+    let mounted = true;
 
-  const relevantUsers = allUsers.data
-    .filter(user => user.status == 'activated')
-    .filter(user => user.profile?.geburtsdatum)
-    .filter(user => {
-      const birtdayString = user.profile.geburtsdatum
-      const dmy = birtdayString.split(".");
-      const birthday = new Date(dmy[2], dmy[1] - 1, dmy[0]);
-      const today = new Date();
-      return today.getDate() === birthday.getDate() && today.getMonth() === birthday.getMonth();
-    });
+    const loadBirthdays = async () => {
+      try {
+        const countResult = await we.api.getUsers({
+          limit: 1,
+        });
 
-  const userLinks = relevantUsers.map(user => {
-    const href = `/profile/${user.id}`
-    return <a href={href}> {user.firstName}  {user.lastName} 🎉 </a >
-  });
+        const allUsers = await we.api.getUsers({
+          limit: countResult.total,
+        });
 
+        const today = new Date();
 
+        const birthdayUsers = allUsers.data
+          .filter((user) => user.status === "activated")
+          .filter((user) => !!user.profile?.geburtsdatum)
+          .filter((user) => {
+            try {
+              const birthdayString = user.profile.geburtsdatum;
 
+              if (!birthdayString) {
+                return false;
+              }
 
+              const parts = birthdayString.split(".");
 
-  return <div>{userLinks}</div>;
+              if (parts.length !== 3) {
+                return false;
+              }
+
+              const day = Number(parts[0]);
+              const month = Number(parts[1]) - 1;
+              const year = Number(parts[2]);
+
+              const birthday = new Date(year, month, day);
+
+              return (
+                birthday.getDate() === today.getDate() &&
+                birthday.getMonth() === today.getMonth()
+              );
+            } catch {
+              return false;
+            }
+          })
+          .map((user) => ({
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          }));
+
+        if (mounted) {
+          setUsers(birthdayUsers);
+        }
+      } catch (err) {
+        console.error(err);
+
+        if (mounted) {
+          setError("Geburtstage konnten nicht geladen werden.");
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadBirthdays();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (loading) {
+    return <div>Lade Geburtstage ...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (users.length === 0) {
+    return <div>🎂 Heute hat niemand Geburtstag.</div>;
+  }
+
+  return (
+    <div>
+      <div style={{ marginBottom: "8px", fontWeight: "bold" }}>
+        🎉 Heute haben Geburtstag:
+      </div>
+
+      {users.map((user) => (
+        <div key={user.id}>
+          {`/profile/${user.id}`}
+            {user.firstName} {user.lastName} 🎂
+          </a>
+        </div>
+      ))}
+    </div>
+  );
 };
-
