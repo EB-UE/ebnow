@@ -34,13 +34,13 @@ jobs:
       - name: Install and build birthday-list
         working-directory: birthday-list
         run: |
-          npm ci
+          npm install
           npm run build
 
       - name: Install and build birthday-preview
         working-directory: birthday-preview
         run: |
-          npm ci
+          npm install
           npm run build
 
       - name: Commit generated files
