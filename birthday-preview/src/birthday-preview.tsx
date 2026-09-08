@@ -107,20 +107,29 @@ export const BirthdayPreview = ({
   }, []);
 
   if (loading) {
-    return <div>Lade Geburtstage ...</div>;
+    return <div class="text-xl">Lade Geburtstage ...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div class="text-xl">{error}</div>;
   }
 
   if (users.length === 0) {
-    return <div>Heute hat niemand Geburtstag. Wünsche deinen Kollegen doch trotzdem einen schönen Tag 🙂</div>;
+    return <div class="text-xl">Heute hat niemand Geburtstag. Wünsche deinen Kollegen doch trotzdem einen schönen Tag 🙂</div>;
   }
 
   return (
     <div>
-      <div style={{ marginBottom: "8px", fontWeight: "bold" }}>
+      <div class="text-2xl" style={{ fontWeight: "bold" }}>
+        🎉 Heute haben Geburtstag:
+      </div>
+      <div class="text-xl" style={{ fontWeight: "bold" }}>
+        🎉 Heute haben Geburtstag:
+      </div>
+      <div class="text-lg" style={{ fontWeight: "bold" }}>
+        🎉 Heute haben Geburtstag:
+      </div>
+      <div class="text-md" style={{ fontWeight: "bold" }}>
         🎉 Heute haben Geburtstag:
       </div>
       {users.map((user) => (
