@@ -25,7 +25,7 @@ export const UsersWithProfileLink = ({ users }: UsersWithProfileLinkProps): Reac
 
   const result = users.map<React.ReactElement>((item) => <UserWithProfileLink key="{item}" {...item} ></UserWithProfileLink>)
   if (result.length == 0) {
-    result.push(<span>Keine Geburtstage</span>)
+    result.push(<span>Keine Geburtstage 😔</span>)
   }
   addCommaBetweenEveryTwoEntries(result);
   return <span>{result}</span>;
