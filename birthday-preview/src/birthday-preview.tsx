@@ -124,7 +124,7 @@ export const BirthdayPreview = ({
         🎉 Heute haben Geburtstag:
       </div>
       {users.map((user) => (
-        <a key={user.id} href={`/profile/${user.id}`}>
+        <a key={user.id} href={`/profile/${user.id}`} class="text-primary-vivid">
             {user.firstName} {user.lastName} 🎂
           </a>
       ))}
