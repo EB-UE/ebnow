@@ -1,3 +1,6 @@
 .today .user-with-profile-link:after {
     content: ' 🎉';
 }
+.user-with-profile-link {
+    color: var(--sb-text-color-primary-vivid);
+}
