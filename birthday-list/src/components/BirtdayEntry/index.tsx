@@ -48,7 +48,7 @@ export const BirthdayEntry = ({ date, users }: BirthdayEntryProps): ReactElement
     month: '2-digit',
     day: '2-digit'
   })
-  const classNames = ["birthday-entry"]
+  const classNames = ["birthday-entry", "mb-1"];
   if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
     classNames.push("today")
     classNames.push("font-semibold")
