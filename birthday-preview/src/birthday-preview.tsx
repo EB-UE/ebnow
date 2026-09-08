@@ -115,7 +115,7 @@ export const BirthdayPreview = ({
   }
 
   if (users.length === 0) {
-    return <div>🎂 Heute hat niemand Geburtstag.</div>;
+    return <div>Heute hat niemand Geburtstag. Wünsche deinen Kollegen doch trotzdem einen schönen Tag 🙂</div>;
   }
 
   return (
@@ -123,10 +123,8 @@ export const BirthdayPreview = ({
       <div style={{ marginBottom: "8px", fontWeight: "bold" }}>
         🎉 Heute haben Geburtstag:
       </div>
-
       {users.map((user) => (
-        <div key={user.id}>
-          {`/profile/${user.id}`}
+        <a key={user.id} href={`/profile/${user.id}`}>
             {user.firstName} {user.lastName} 🎂
           </a>
         </div>
