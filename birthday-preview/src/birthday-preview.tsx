@@ -119,18 +119,9 @@ export const BirthdayPreview = ({
   }
 
   return (
-    <div>
-      <div class="text-2xl" style={{ fontWeight: "bold" }}>
-        🎉 Heute haben Geburtstag:
-      </div>
+    <div class="mb-2">
       <div class="text-xl" style={{ fontWeight: "bold" }}>
-        🎉 Heute haben Geburtstag:
-      </div>
-      <div class="text-lg" style={{ fontWeight: "bold" }}>
-        🎉 Heute haben Geburtstag:
-      </div>
-      <div class="text-md" style={{ fontWeight: "bold" }}>
-        🎉 Heute haben Geburtstag:
+        🎉 Heute haben Geburtstag: 🎉
       </div>
       {users.map((user) => (
         <a key={user.id} href={`/profile/${user.id}`} class="text-primary-vivid">
