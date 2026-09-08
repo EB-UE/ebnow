@@ -123,11 +123,17 @@ export const BirthdayPreview = ({
       <div class="text-xl" style={{ fontWeight: "bold" }}>
         🎉 Heute haben Geburtstag: 🎉
       </div>
+      <div>
       {users.map((user) => (
         <a key={user.id} href={`/profile/${user.id}`} class="text-primary-vivid">
             {user.firstName} {user.lastName} 🎂
           </a>
       ))}
+      </div>
+      
+      <div>
+        <a class="text-primary-vivid" href="https://ebnow.eb.de/content/page/5e41937ad1e5207d12fa185a">Vergangene / zukünftige Geburtstage</a>
+      </div>
         </div>
   );
 };
