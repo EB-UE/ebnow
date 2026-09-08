@@ -127,7 +127,7 @@ export const BirthdayPreview = ({
         <a key={user.id} href={`/profile/${user.id}`}>
             {user.firstName} {user.lastName} 🎂
           </a>
-        </div>
       ))}
+        </div>
   );
 };
