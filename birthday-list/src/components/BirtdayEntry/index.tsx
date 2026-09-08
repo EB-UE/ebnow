@@ -51,6 +51,7 @@ export const BirthdayEntry = ({ date, users }: BirthdayEntryProps): ReactElement
   const classNames = ["birthday-entry"]
   if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
     classNames.push("today")
+    classNames.push("font-semibold")
   }
 
   const birthdayLine = <li className={classNames.join(" ")}>{dateformat.format(date)}: <UsersWithProfileLink users={birthdayUserAtDate} /> </li>
