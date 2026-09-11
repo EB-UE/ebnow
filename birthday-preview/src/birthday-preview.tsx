@@ -120,7 +120,7 @@ export const BirthdayPreview = ({
 
   if (users.length === 0) {
     return (<>
-      <div class="text-xl">Heute hat niemand Geburtstag. Wünsche deinen Kollegen doch trotzdem einen schönen Tag 🙂</div>;
+      <div class="text-xl">Heute hat niemand Geburtstag. Wünsche deinen Kollegen doch trotzdem einen schönen Tag 🙂</div>
       {linkToBirtdayList}
     </>)
   }
