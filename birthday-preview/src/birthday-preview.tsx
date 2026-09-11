@@ -114,9 +114,13 @@ export const BirthdayPreview = ({
     return <div class="text-xl">{error}</div>;
   }
 
-  const linkToBirtdayList = <div>
-    <a class="text-primary-vivid" href="https://ebnow.eb.de/content/page/5e41937ad1e5207d12fa185a">Vergangene / zukünftige Geburtstage</a>
-  </div>;
+  const linkToBirtdayList =
+    <>
+      <br></br>
+      <div>
+        <a class="text-primary-vivid" href="https://ebnow.eb.de/content/page/5e41937ad1e5207d12fa185a">Vergangene / zukünftige Geburtstage</a>
+      </div>
+    </>;
 
   if (users.length === 0) {
     return (<>
@@ -138,7 +142,6 @@ export const BirthdayPreview = ({
           </a>
         ))}
       </div>
-      <br></br>
       {linkToBirtdayList}
     </div>
   );
