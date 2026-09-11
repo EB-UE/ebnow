@@ -19,20 +19,11 @@ import { JSONSchema7 } from "json-schema";
  * see https://rjsf-team.github.io/react-jsonschema-form/docs/ for documentation
  */
 export const configurationSchema: JSONSchema7 = {
-  properties: {
-    message: {
-      type: "string",
-      title: "message",
-    },
-  },
+  properties: {},
 };
 
 /**
  * schema to add more customization to the form's look and feel
  * @see https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
  */
-export const uiSchema: UiSchema = {
-  message: {
-    "ui:help": "Please enter a message to show",
-  },
-};
+export const uiSchema: UiSchema = {};
