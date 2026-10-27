@@ -8,6 +8,7 @@ on:
       - 'birthday-list/dist/**'
       - 'birthday-preview/dist/**'
       - 'lunchlotterie-hotdog/dist/**'
+      - 'lunchlotterie-hotdog-vibe-code/dist/**'
       - 'qr-vcard/dist/**'
       - 'weihnachtspaeckchenaktion-christmastree/dist/**'
 
@@ -34,6 +35,7 @@ jobs:
             birthday-list/package-lock.json
             birthday-preview/package-lock.json
             lunchlotterie-hotdog/package-lock.json
+            /lunchlotterie-hotdog-vibe-code/package-lock.json
             qr-vcard/package-lock.json
             weihnachtspaeckchenaktion-christmastree/package-lock.json
 
@@ -51,6 +53,12 @@ jobs:
 
       - name: Install and build lunchlotterie-hotdog
         working-directory: lunchlotterie-hotdog
+        run: |
+          npm install
+          npm run build
+          
+      - name: Install and build lunchlotterie-hotdog
+        working-directory: lunchlotterie-hotdog-vibe-code
         run: |
           npm install
           npm run build
