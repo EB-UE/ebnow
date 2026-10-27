@@ -27,7 +27,6 @@ import './style.css';
 const widgetAttributes: string[] = [
   'startDatum',
   'endeDatum',
-  'testDatum',
   'beitragLink',
   'hotdogAnzeigen',
 ];
