@@ -21,8 +21,168 @@ export interface LunchlotterieHotdogProps extends BlockAttributes {
   message: string;
 }
 
-export const LunchlotterieHotdog = ({ message, contentLanguage }: LunchlotterieHotdogProps): ReactElement => {
-  return <div id="hotdog_widget" class="hotdog-lunchlotterie" style="display:none">
+export const LunchlotterieHotdog = ({ startDatum, endeDatum, beitragLink, hotdogAnzeigen, }: LunchlotterieHotdogProps): ReactElement => {
+var hotdogWidget = document.getElementById("hotdog_widget");
+
+
+function parseGermanDate(datumAlsString) {
+    var [day, month, year] = datumAlsString.split(".").map(Number);
+    return new Date(year, month - 1, day);
+}
+
+function datediff(first, second) {
+    return Math.round((second - first) / (1000 * 60 * 60 * 24));
+}
+
+var startDatumDate = parseGermanDate(startDatum);
+var endeDatumDate = parseGermanDate(endeDatum);
+
+var totaleDifferenz = datediff(startDatumDate, endeDatum);
+var aktuelleDifferenz = datediff(endeDatumDate, new Date());
+var tageÜbrig = (totaleDifferenz - aktuelleDifferenz) + 1;
+
+console.log(tageÜbrig + "tage");
+
+var fortschritt = (aktuelleDifferenz / totaleDifferenz) * 100;
+
+
+// alter Shit
+
+var remainRect = document.getElementById("remainRect");
+var biteG = document.getElementById("biteG");
+var crumbsLayer = document.getElementById("crumbs");
+var groundLayer = document.getElementById("groundCrumbs");
+var pctLabel = document.getElementById("pctLabel");
+var slider = document.getElementById("progress");
+var btnAuto = document.getElementById("auto");
+var btnReset = document.getElementById("reset");
+
+var LEFT_X = 80;
+var WIDTH = 560;
+var MID_Y = 140;
+var FLOOR_Y = 210;
+
+var Y_OFFSETS = [-30, -18, -6, 6, 18, 30];
+var BASE_R = [20, 18, 16, 16, 18, 20];
+
+var biteCircles = Y_OFFSETS.map(() => {
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("r", 0);
+    biteG.appendChild(c);
+    return c;
+});
+
+var lastProgress = 0;
+var autoplay = true;
+var rafId = null;
+var groundCrumbsCount = 0;
+var MAX_GROUND_CRUMBS = 8;
+
+function update(progress) {
+    var p = Math.max(0, Math.min(100, progress)) / 100;
+    var remainingW = WIDTH * (1 - p);
+    var rightX = LEFT_X + remainingW;
+
+    remainRect.setAttribute("width", remainingW);
+    pctLabel.textContent = `${tageÜbrig} Tage übrig`;
+
+    var depthScale = 0.7 + 0.5 * p;
+    biteCircles.forEach((c, i) => {
+        var cx = rightX - BASE_R[i] * 0.3;
+        var cy = MID_Y + Y_OFFSETS[i];
+        var r = BASE_R[i] * depthScale;
+        c.setAttribute("cx", cx);
+        c.setAttribute("cy", cy);
+        c.setAttribute("r", p === 0 ? 0 : r);
+    });
+
+    if (progress > lastProgress) spawnFallingCrumbs(rightX);
+    accumulateGroundCrumbs(p, rightX);
+    lastProgress = progress;
+}
+
+function spawnFallingCrumbs(edgeX) {
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    var y = MID_Y + (Math.random() * 20 - 10);
+    var r = 1.8 + Math.random() * 2.6;
+    c.setAttribute("cx", edgeX - (6 + Math.random() * 12));
+    c.setAttribute("cy", y);
+    c.setAttribute("r", r);
+    c.setAttribute("class", "crumb");
+    var dx = 40 + Math.random() * 120;
+    var dy = 70 + Math.random() * 170;
+    var rot = Math.random() * 160 - 80 + "deg";
+    var dur = 700 + Math.random() * 1000 + "ms";
+    c.style.setProperty("--dx", dx + "px");
+    c.style.setProperty("--dy", dy + "px");
+    c.style.setProperty("--rot", rot);
+    c.style.setProperty("--dur", dur);
+    c.addEventListener("animationend", () => c.remove());
+    crumbsLayer.appendChild(c);
+}
+
+function accumulateGroundCrumbs(p, edgeX) {
+    var targetCount = Math.round(p * MAX_GROUND_CRUMBS);
+    var toAdd = targetCount - groundCrumbsCount;
+    if (toAdd <= 0) return;
+    for (var i = 0; i < toAdd; i++) {
+        var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        var x = edgeX - 40 + Math.random() * 160;
+        var y = FLOOR_Y + 6 + Math.random() * 10;
+        var r = 1.3 + Math.random() * 2.3;
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", r);
+        c.setAttribute("class", "ground-crumb");
+        groundLayer.appendChild(c);
+        groundCrumbsCount++;
+    }
+}
+
+slider.addEventListener('input', e => {
+    if (autoplay) { autoplay = false; btnAuto.textContent = 'Play'; if (rafId) cancelAnimationFrame(rafId); }
+    update(parseFloat(e.target.value));
+});
+
+function tick() {
+    var v = parseFloat(slider.value);
+    var next = v + 0.6;
+    slider.value = next >= 100 ? 100 : next;
+    update(parseFloat(slider.value));
+    if (autoplay && next < 100 && next <= fortschritt) rafId = requestAnimationFrame(tick);
+    else { autoplay = false; btnAuto.textContent = 'Play'; }
+}
+
+update(0);
+
+
+var el = document.getElementById("triggers-eating-when-visible");
+
+// Wird aufgerufen, wenn sich die Schnittmenge ändert
+var observer = new IntersectionObserver(
+    (entries, obs) => {
+        for (var entry of entries) {
+            if (entry.isIntersecting) {
+                // -> Hier deine Methode aufrufen:
+                tick();
+                // Falls nur einmal ausführen:
+                obs.unobserve(entry.target);
+            }
+        }
+    },
+    {
+        root: null, // null = Viewport
+        rootMargin: "0px", // z. B. '100px 0px' um früher zu triggern
+        threshold: 0.1 // ab 10% Sichtbarkeit
+    }
+);
+
+observer.observe(el);
+
+
+const   visibility= hotdogAnzeigenData === "true" ? visible : invisible;
+  
+  return <div id="hotdog_widget" class="hotdog-lunchlotterie" class={{visibility}}>
   <h2>Verbleibende Zeit bis zur Auslosung der Lunch Lotterie </h2>
    <svg id="hotdogSVG" viewBox="0 0 800 280">
     <defs>
@@ -81,7 +241,7 @@ export const LunchlotterieHotdog = ({ message, contentLanguage }: LunchlotterieH
     <text id="pctLabel" class="pct" x="86" y="64"></text>
   </svg>
   
-  <a id="lunchlotterieBeitragLink" target="_blank" href="">
+  <a id="lunchlotterieBeitragLink" target="_blank" href="{{beitragLink}}">
    Zum EBnow Beitrag
 </a>
 
