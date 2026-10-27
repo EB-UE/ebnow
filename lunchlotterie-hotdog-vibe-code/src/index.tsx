@@ -19,7 +19,6 @@ import { LunchlotterieHotdogProps, LunchlotterieHotdog } from "./lunchlotterie-h
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import icon from "../resources/lunchlotterie-hotdog.svg";
 import pkg from '../package.json'
-import './style.css';
 
 /**
  * Attribute names are lowercase, because HTML normalises attribute names to lowercase.
