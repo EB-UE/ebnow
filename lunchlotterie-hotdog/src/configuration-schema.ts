@@ -20,12 +20,25 @@ import { JSONSchema7 } from "json-schema";
  */
 export const configurationSchema: JSONSchema7 = {
   properties: {
-    message: {
+    startDatum: {
       type: "string",
-      title: "message",
+      title: "Ab wann soll gelunched werden?",
+    },
+    endeDatum: {
+      type: "string",
+      title: "Bis wann soll gelunched werden?",
+    },
+    beitragLink: {
+      type: "string",
+      title: "Link zum EB-Now Beitrag",
+    },
+    hotdogAnzeigen: {
+      type: "string",
+      title: "Soll der Hotdog angezeigt werden?",
     },
   },
 };
+
 
 /**
  * schema to add more customization to the form's look and feel
