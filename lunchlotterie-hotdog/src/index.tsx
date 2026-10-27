@@ -19,6 +19,7 @@ import { LunchlotterieHotdogProps, LunchlotterieHotdog } from "./lunchlotterie-h
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import icon from "../resources/lunchlotterie-hotdog.svg";
 import pkg from '../package.json'
+import './style.css';
 
 /**
  * Define which attributes are handled by the widget. This should be also reflected in configuration schema
