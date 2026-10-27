@@ -1,3 +1,11 @@
+.visible {
+	display: block;
+}
+
+.invisible {
+	 display: none;
+}
+
 .hotdog-lunchlotterie #auto, .hotdog-lunchlotterie #progress {
 	 display: none;
 }
