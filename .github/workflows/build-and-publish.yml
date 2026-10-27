@@ -35,7 +35,7 @@ jobs:
             birthday-list/package-lock.json
             birthday-preview/package-lock.json
             lunchlotterie-hotdog/package-lock.json
-            /lunchlotterie-hotdog-vibe-code/package-lock.json
+            lunchlotterie-hotdog-vibe-code/package-lock.json
             qr-vcard/package-lock.json
             weihnachtspaeckchenaktion-christmastree/package-lock.json
 
@@ -80,7 +80,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add birthday-list/dist birthday-preview/dist lunchlotterie-hotdog/dist qr-vcard/dist weihnachtspaeckchenaktion-christmastree/dist
+          git add birthday-list/dist birthday-preview/dist lunchlotterie-hotdog/dist qr-vcard/dist weihnachtspaeckchenaktion-christmastree/dist lunchlotterie-hotdog-vibe-code/dist
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
