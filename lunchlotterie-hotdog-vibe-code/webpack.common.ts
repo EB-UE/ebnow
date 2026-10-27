@@ -44,6 +44,7 @@ const config: webpack.Configuration = {
   output: {
     filename: "[name].js",
     path: __dirname + "/dist",
+    clean: true,
   },
 };
 
