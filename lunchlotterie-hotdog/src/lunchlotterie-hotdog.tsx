@@ -18,7 +18,10 @@ import { BlockAttributes } from "widget-sdk";
  * React Component
  */
 export interface LunchlotterieHotdogProps extends BlockAttributes {
-  message: string;
+  startDatum: string;
+  endeDatum: string;
+  beitragLink: string;
+  hotdogAnzeigen: string;
 }
 
 export const LunchlotterieHotdog = ({ startDatum, endeDatum, beitragLink, hotdogAnzeigen, }: LunchlotterieHotdogProps): ReactElement => {
