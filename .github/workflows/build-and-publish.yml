@@ -60,8 +60,8 @@ jobs:
       - name: Install and build lunchlotterie-hotdog-vibe-code
         working-directory: lunchlotterie-hotdog-vibe-code
         run: |
-          echo npm install
-          echo npm run build
+          npm install
+          npm run build
 
       - name: Install and build qr-vcard
         working-directory: qr-vcard
