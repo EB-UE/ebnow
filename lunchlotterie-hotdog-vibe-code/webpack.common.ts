@@ -15,7 +15,7 @@ import * as webpack from "webpack";
 
 const config: webpack.Configuration = {
   entry: {
-    "eb.lunchlotterie-hotdog": "./src/index.tsx",
+    "eb.lunchlotterie-hotdog-vibe-code": "./src/index.tsx",
   },
   module: {
     rules: [
