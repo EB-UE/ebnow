@@ -22,12 +22,12 @@ export const configurationSchema: JSONSchema7 = {
   properties: {
     startdatum: {
       type: "string",
-      title: "Ab wann soll gelunched werden?",
+      title: "Startdatum des Anmeldungszeitraums",
       pattern: "^\\d{2}\\.\\d{2}\\.\\d{4}$",
     },
     enddatum: {
       type: "string",
-      title: "Bis wann soll gelunched werden?",
+      title: "Enddatum des Anmeldungszeitraums (Auslosungstag)",
       pattern: "^\\d{2}\\.\\d{2}\\.\\d{4}$",
     },
     beitraglink: {
@@ -58,6 +58,7 @@ export const uiSchema: UiSchema = {
   },
   beitraglink: {
     "ui:placeholder": "https://...",
+    "ui:help": "Wird als Button verlinkt",
   },
   hotdoganzeigen: {
     "ui:enumNames": ["Ja", "Nein"],
