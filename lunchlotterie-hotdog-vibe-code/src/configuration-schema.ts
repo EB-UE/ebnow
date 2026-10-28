@@ -27,7 +27,7 @@ export const configurationSchema: JSONSchema7 = {
     },
     enddatum: {
       type: "string",
-      title: "Enddatum des Anmeldungszeitraums (Auslosungstag)",
+      title: "Enddatum des Anmeldungszeitraums",
       pattern: "^\\d{2}\\.\\d{2}\\.\\d{4}$",
     },
     beitraglink: {
