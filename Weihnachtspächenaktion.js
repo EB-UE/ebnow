@@ -6,7 +6,7 @@ var html = `
   </div>
   <div class="progress-counter"><span class="progress-count">0</span> <span class="progress-label">Geschenke</span>
     <br>
-    <a href="https://ebnow.eb.de/content/news/article/690b7b848ab25b65b040ae66">Weihnachtspäckchenaktion 2025</a>
+    Weihnachtspäckchenaktion 2026
   </div>
 </div>
 `;
