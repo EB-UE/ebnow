@@ -242,10 +242,10 @@ var lit = $(".Weihnachtspäckchenaktion .tree-circle.on").length;
 var i = lit;
 function myLoop() {
   var loop = setTimeout(function () {
-    var transformed=Math.floor(i*120/301);
+    var transformed=Math.floor(i*90/301);
 
     $(".Weihnachtspäckchenaktion .item").eq(i).addClass("on");
-    $(".Weihnachtspäckchenaktion .progress-count").text(transformed+ '/120'); // Update the progress counter
+    $(".Weihnachtspäckchenaktion .progress-count").text(transformed+ '/90'); // Update the progress counter
     if (transformed == totalItems) {
       $(".Weihnachtspäckchenaktion .star").addClass("on"); // Light star when goal is met
     }
